@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Player1.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.995192, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.965517, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 512.5, 34 )
+
+[node name="FightArea" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="texture" type="Sprite" parent="Ground"]
+position = Vector2( 512, 564 )
+scale = Vector2( 0.5, 72 )
+texture = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2( 512, 562 )
+shape = SubResource( 1 )
+
+[node name="Player1" parent="." instance=ExtResource( 1 )]
