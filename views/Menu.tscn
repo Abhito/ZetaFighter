@@ -1,38 +1,336 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://fonts/Franklin Gothic Demi Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=2]
+[ext_resource path="res://images/menu/spacebg.png" type="Texture" id=3]
+[ext_resource path="res://images/menu/original.png" type="Texture" id=4]
+[ext_resource path="res://images/menu/blueblueeye.png" type="Texture" id=5]
+[ext_resource path="res://images/menu/redeye.png" type="Texture" id=6]
+[ext_resource path="res://images/menu/planet.png" type="Texture" id=7]
+[ext_resource path="res://fonts/Franklin Gothic Medium Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://music/LOOP_Blasting Through the Sky.wav" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 30
+size = 70
 outline_size = 2
 outline_color = Color( 0.266667, 0.156863, 1, 1 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 60
+outline_size = 1
+outline_color = Color( 0.341176, 0.733333, 0.733333, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=9]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_color = Color( 1, 1, 1, 1 )
+corner_detail = 1
+shadow_color = Color( 0.572549, 0.572549, 0.572549, 0.6 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Intro"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BigBlue:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.160925, 0.160925 ), Vector2( 0.402395, 0.402395 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BigBlue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 125.375, 606.867 ), Vector2( 309.375, 377.229 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BigBlue:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GameTitle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("gamebuttons:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BigBlue:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.160925, 0.160925 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BigBlue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 125.375, 606.867 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BigBlue:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Redeye:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Redeye:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Planet:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("GameTitle:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("gamebuttons:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "redeye"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Redeye:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Redeye:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.439216, 0.305882, 0.305882, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0.439216, 0.305882, 0.305882, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Planet:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_levels/2 = true
+glow_levels/5 = false
+glow_intensity = 0.3
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
+glow_hdr_luminance_cap = 2.0
+glow_bicubic_upscale = true
+
 [node name="Menu" type="Control"]
-margin_top = 24.0
-margin_right = 224.0
-margin_bottom = 24.0
+margin_top = 8.0
+margin_right = 1280.0
+margin_bottom = 728.0
 script = ExtResource( 2 )
 
+[node name="background" type="TextureRect" parent="."]
+anchor_top = -0.011
+anchor_bottom = -0.011
+margin_top = -0.0799994
+margin_right = 3195.0
+margin_bottom = 1901.92
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="Planet" type="Sprite" parent="."]
+light_mask = 6
+position = Vector2( 968, 384 )
+scale = Vector2( 0.411089, 0.411089 )
+texture = ExtResource( 7 )
+
+[node name="BigBlue" type="Sprite" parent="."]
+visible = false
+position = Vector2( 125.375, 606.867 )
+scale = Vector2( 0.160925, 0.160925 )
+texture = ExtResource( 5 )
+
+[node name="Redeye" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 1.5, 1.5, 1.5, 1 )
+light_mask = 6
+position = Vector2( 309.375, 377.229 )
+scale = Vector2( 0.402, 0.402 )
+texture = ExtResource( 6 )
+
+[node name="Original" type="Sprite" parent="."]
+position = Vector2( 273.5, 422.002 )
+scale = Vector2( 0.354987, 0.354987 )
+texture = ExtResource( 4 )
+
 [node name="GameTitle" type="RichTextLabel" parent="."]
-margin_left = 416.0
-margin_top = 8.0
-margin_right = 611.0
-margin_bottom = 48.0
-custom_colors/default_color = Color( 0, 0.760784, 1, 1 )
+visible = false
+margin_left = 440.0
+margin_top = 48.0
+margin_right = 840.0
+margin_bottom = 136.0
+custom_colors/default_color = Color( 0.698039, 0.929412, 1, 1 )
 custom_fonts/normal_font = SubResource( 1 )
 text = "Zeta Fighter"
 
 [node name="gamebuttons" type="VBoxContainer" parent="."]
-margin_left = 776.0
-margin_top = 128.0
-margin_right = 1000.0
-margin_bottom = 592.0
+visible = false
+margin_left = 512.0
+margin_top = 232.0
+margin_right = 768.0
+margin_bottom = 696.0
 
 [node name="playButton" type="Button" parent="gamebuttons"]
-margin_right = 224.0
-margin_bottom = 20.0
+margin_right = 256.0
+margin_bottom = 69.0
+custom_colors/font_color = Color( 0.952941, 0.247059, 0.247059, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 7 )
 text = "Play"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Intro = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+anims/redeye = SubResource( 5 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="gamebuttons/playButton" to="." method="_on_playButton_pressed"]

@@ -3,7 +3,9 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$AnimationPlayer.play("Intro")
+	yield(get_node("AnimationPlayer"), "animation_finished")
+	$AnimationPlayer.play("redeye")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
