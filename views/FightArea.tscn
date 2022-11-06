@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/Player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/FightArea.gd" type="Script" id=2]
 [ext_resource path="res://scripts/CameraController.gd" type="Script" id=3]
 [ext_resource path="res://music/LOOP_Mysterious Cave.wav" type="AudioStream" id=4]
@@ -13,7 +12,7 @@ colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.96
 gradient = SubResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 640, 36.5 )
+extents = Vector2( 640, 30.25 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 451.5 )
@@ -36,7 +35,7 @@ margin_bottom = 40.0
 text = "Back"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 640, 504 )
+position = Vector2( 640, 544 )
 current = true
 limit_left = 0
 limit_right = 1280
@@ -48,25 +47,26 @@ min_zoom = 0.1
 max_zoom = 1
 margin = Vector2( 100, 50 )
 
+[node name="Player1" type="Node2D" parent="."]
+position = Vector2( 72, 588 )
+
+[node name="Player2" type="Node2D" parent="."]
+position = Vector2( 1156, 592 )
+
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2( 0, 8 )
+position = Vector2( 16, 648 )
 
 [node name="texture" type="Sprite" parent="Ground"]
-position = Vector2( 640, 678 )
-scale = Vector2( 0.625, 76 )
+position = Vector2( 624, 39 )
+scale = Vector2( 0.625, 70 )
 texture = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 640, 676.5 )
+position = Vector2( 624, 34.25 )
 shape = SubResource( 1 )
 
-[node name="Player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1200, 616 )
-
-[node name="Player1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 616 )
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1296, 279 )
