@@ -9,10 +9,10 @@ func enter(_msg := {}) -> void:
 func physics_update(delta: float) -> void:
 		
 	if not is_zero_approx(player.get_input_direction()):
-		player._velocity.x = player.get_input_direction() * player.speed
-		#player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed, player.acceleration * delta)
-	#else:
-		#player._velocity.x = lerp(player._velocity.x, 0, player.air_friction * delta)
+		#player._velocity.x = player.get_input_direction() * player.speed
+		player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed, player.acceleration * delta)
+	else:
+		player._velocity.x = lerp(player._velocity.x, 0, player.air_friction * delta)
 		
 	player._velocity.y += player.gravity * delta
 	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
