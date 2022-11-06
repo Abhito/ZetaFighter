@@ -12,6 +12,7 @@ export var gravity := 4000.0
 var friction = 20
 var air_friction = 10
 var acceleration = 60
+var can_input = true
 
 var _jump_made := 0
 var _velocity := Vector2.ZERO
@@ -24,6 +25,8 @@ var _other_player = null
 var myNumber = 0
 
 func get_input_direction() -> float:
+	if not can_input:
+		return 0.0
 	var _horizontal_direction = 0
 	if myNumber == 1:
 		_horizontal_direction = Input.get_action_strength("right_one") - Input.get_action_strength("left_one")
@@ -38,6 +41,9 @@ func _setup(_player, number):
 
 func _change_color():
 	_animation_sprite.modulate = Color8(255,200,200)
+	
+func ready_for_input():
+	can_input = true
 	
 func _physics_process(delta: float) -> void:
 #	var _horizontal_direction = 0

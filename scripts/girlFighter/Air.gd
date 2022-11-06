@@ -28,9 +28,13 @@ func physics_update(delta: float) -> void:
 	if player.myNumber == 1:
 		if Input.is_action_just_pressed("up_one"):
 			state_machine.transition_to("Jump", {do_jump = true})
+		elif Input.is_action_just_pressed("action1_one"):
+			state_machine.transition_to("Attack1")
 	elif player.myNumber == 2:
 		if Input.is_action_just_pressed("up_two"):
 			state_machine.transition_to("Jump", {do_jump = true})
+		elif Input.is_action_just_pressed("action1_two"):
+			state_machine.transition_to("Attack1")
 	if player._velocity.y > 0.0 and not player.is_on_floor():
 		state_machine.transition_to("Fall")
 	elif player.is_on_floor():
