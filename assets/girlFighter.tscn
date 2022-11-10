@@ -979,10 +979,11 @@ disabled = true
 
 [node name="Ki" type="AnimatedSprite" parent="Position2D"]
 visible = false
-position = Vector2( 0, -5 )
-scale = Vector2( 0.38, 0.38 )
+modulate = Color( 1, 1, 1.5, 1 )
+light_mask = 12
+position = Vector2( 0, -8 )
+scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Position2D"]

@@ -24,11 +24,14 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=4]
 
 [node name="KiProjectile" type="KinematicBody2D"]
+modulate = Color( 1, 1, 1.5, 1 )
+light_mask = 12
 collision_layer = 4
 collision_mask = 14
 script = ExtResource( 2 )
 
 [node name="KiOrb" type="AnimatedSprite" parent="."]
+light_mask = 12
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 3 )
 playing = true
