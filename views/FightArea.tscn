@@ -23,16 +23,30 @@ script = ExtResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-margin_top = -8.0
 margin_right = 1280.0
-margin_bottom = 720.0
+margin_bottom = 728.0
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 margin_left = 1160.0
-margin_top = 8.0
+margin_top = 688.0
 margin_right = 1280.0
-margin_bottom = 40.0
+margin_bottom = 720.0
 text = "Back"
+
+[node name="Player1" type="ProgressBar" parent="CanvasLayer/Control"]
+margin_left = 64.0
+margin_right = 512.0
+margin_bottom = 64.0
+percent_visible = false
+
+[node name="Player2" type="ProgressBar" parent="CanvasLayer/Control"]
+anchor_top = 0.011
+anchor_bottom = 0.011
+margin_left = 768.0
+margin_top = -8.008
+margin_right = 1216.0
+margin_bottom = 55.992
+percent_visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 640, 544 )
@@ -55,6 +69,7 @@ position = Vector2( 1156, 592 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2( 16, 648 )
+collision_mask = 0
 
 [node name="texture" type="Sprite" parent="Ground"]
 position = Vector2( 624, 39 )
@@ -67,6 +82,8 @@ shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
+collision_layer = 9
+collision_mask = 15
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1296, 279 )
