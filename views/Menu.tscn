@@ -60,7 +60,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.5, 1.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 125.375, 606.867 ), Vector2( 309.375, 377.229 ) ]
+"values": [ Vector2( 125.375, 606.867 ), Vector2( 304, 376 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BigBlue:visible")
@@ -259,7 +259,7 @@ script = ExtResource( 2 )
 [node name="background" type="TextureRect" parent="."]
 anchor_top = -0.011
 anchor_bottom = -0.011
-margin_top = -0.0799994
+margin_top = -0.0799999
 margin_right = 3195.0
 margin_bottom = 1901.92
 rect_scale = Vector2( 0.4, 0.4 )
@@ -282,11 +282,12 @@ visible = false
 modulate = Color( 0, 0, 0, 1 )
 self_modulate = Color( 1.5, 1.5, 1.5, 1 )
 light_mask = 6
-position = Vector2( 309.375, 377.229 )
+position = Vector2( 304, 376 )
 scale = Vector2( 0.402, 0.402 )
 texture = ExtResource( 6 )
 
 [node name="Original" type="Sprite" parent="."]
+visible = false
 position = Vector2( 273.5, 422.002 )
 scale = Vector2( 0.354987, 0.354987 )
 texture = ExtResource( 4 )

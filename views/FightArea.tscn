@@ -82,7 +82,7 @@ position = Vector2( 72, 588 )
 [node name="Player2" type="Node2D" parent="."]
 position = Vector2( 1156, 592 )
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
 position = Vector2( 16, 648 )
 collision_mask = 0
 

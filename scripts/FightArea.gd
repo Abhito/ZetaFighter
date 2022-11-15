@@ -6,7 +6,9 @@ onready var _camera = $Camera2D
 onready var _player1health = $CanvasLayer/Control/Player1
 onready var _player2health = $CanvasLayer/Control/Player2
 var characterchosen1 = preload("res://assets/girlFighter.tscn")
-var characterchosen2 = preload("res://assets/girlFighter.tscn")
+var characterchosen2 = preload("res://assets/cody.tscn")
+var moveList1 = ["left_one", "up_one", "right_one", "action1_one", "action2_one"]
+var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"]
 
 
 
@@ -25,8 +27,8 @@ func _initialize():
 	
 	_player1.add_child(character1)
 	_player2.add_child(character2)
-	character1._setup(character2, 1, _player1health)
-	character2._setup(character1, 2, _player2health)
+	character1._setup(character2, 1, _player1health, moveList1)
+	character2._setup(character1, 2, _player2health, moveList2)
 	setupHealth(character1.health, character2.health)
 	if sameCharacter:
 		character2._change_color()

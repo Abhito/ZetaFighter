@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-var speed = 350
+var speed = 200
 var direction  := Vector2.RIGHT
-var damage = 50
-var damage_tier = 1
+var damage = 30
+var damage_tier = 0
 
 func _ready():
 	set_as_toplevel(true)
@@ -11,13 +11,7 @@ func _ready():
 	look_at(direction + global_position)
 
 func size(value):
-	damage = damage * value
-	scale.x = scale.x * value
-	scale.y = scale.y * value
-	if damage > 200:
-		damage_tier = 3
-	elif damage > 125:
-		damage_tier = 2
+	scale.x = scale.x * -1
 	
 func _physics_process(delta):
 	var v = direction * speed * delta
@@ -34,4 +28,4 @@ func _physics_process(delta):
 			queue_free()
 		
 func is_proj():
-	return damage_tier
+	return 0

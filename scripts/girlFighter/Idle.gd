@@ -19,21 +19,14 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Hurt", {do_more = true})
 		else:
 			state_machine.transition_to("Hurt")
-	if player.myNumber == 1:
-		if Input.is_action_pressed("action2_one"):
-			state_machine.transition_to("Charge")
-		elif Input.is_action_just_pressed("up_one"):
-			state_machine.transition_to("Jump", {do_jump = true})
-		elif Input.is_action_just_pressed("action1_one"):
-			state_machine.transition_to("Attack1")
-		elif not is_zero_approx(player.get_input_direction()):
-			state_machine.transition_to("Walk")
-	elif player.myNumber == 2:
-		if Input.is_action_pressed("action2_two"):
-			state_machine.transition_to("Charge")
-		elif Input.is_action_just_pressed("up_two"):
-			state_machine.transition_to("Jump", {do_jump = true})
-		elif Input.is_action_just_pressed("action1_two"):
-			state_machine.transition_to("Attack1")
-		elif not is_zero_approx(player.get_input_direction()):
-			state_machine.transition_to("Walk")
+			
+	if Input.is_action_pressed(player.moveList[4]):
+		state_machine.transition_to("Charge")
+	elif player.dash_count > 1 && player.dash.can_dash:
+		state_machine.transition_to("Dash")
+	elif Input.is_action_just_pressed(player.moveList[1]):
+		state_machine.transition_to("Jump", {do_jump = true})
+	elif Input.is_action_just_pressed(player.moveList[3]):
+		state_machine.transition_to("Attack1")
+	elif not is_zero_approx(player.get_input_direction()):
+		state_machine.transition_to("Walk")

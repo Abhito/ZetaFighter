@@ -1,19 +1,11 @@
 extends PlayerState
 
-
 export (NodePath) var _animation_player
 onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 func enter(_msg := {}) -> void:
-	if _msg.has("do_jump"):
-		if(player._jump_made == 0):
-			player._velocity.y = -player.jump_strength
-		elif player._jump_made > 0:
-			if player._jump_made < player.maximum_jumps:
-				player._velocity.y = -player.double_jump_strength
-		player._jump_made += 1
-		animation_player.play("Jump")
-		
+	animation_player.play("Fall")
+	
 func physics_update(delta: float) -> void:
 		
 	if not is_zero_approx(player.get_input_direction()):
@@ -29,7 +21,6 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Hurt", {do_more = true})
 		else:
 			state_machine.transition_to("Hurt")
-			
 	if Input.is_action_pressed(player.moveList[4]):
 		state_machine.transition_to("Charge")
 	elif player.dash_count > 1 && player.dash.can_dash:
@@ -37,11 +28,11 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_just_pressed(player.moveList[1]):
 		state_machine.transition_to("Jump", {do_jump = true})
 	elif Input.is_action_just_pressed(player.moveList[3]):
-		state_machine.transition_to("Attack1")
-		
-	if player._velocity.y > 0.0 and not player.is_on_floor():
-		state_machine.transition_to("Fall")
-	elif player.is_on_floor():
+		if(player.has_sword):
+			state_machine.transition_to("AttackSword1")
+		else:
+			state_machine.transition_to("Attack1")
+	if player.is_on_floor():
 		if is_zero_approx(player.get_input_direction()):
 			state_machine.transition_to("Idle")
 		else:

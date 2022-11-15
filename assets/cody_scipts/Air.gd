@@ -37,7 +37,10 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_just_pressed(player.moveList[1]):
 		state_machine.transition_to("Jump", {do_jump = true})
 	elif Input.is_action_just_pressed(player.moveList[3]):
-		state_machine.transition_to("Attack1")
+		if(player.has_sword):
+			state_machine.transition_to("AttackSword1")
+		else:
+			state_machine.transition_to("Attack1")
 		
 	if player._velocity.y > 0.0 and not player.is_on_floor():
 		state_machine.transition_to("Fall")

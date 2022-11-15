@@ -11,8 +11,6 @@ func enter(_msg := {}) -> void:
 	animation_player.play("Charge")
 
 func physics_update(delta: float) -> void:
-	if player.charge < 5:
-		player.charge += delta * 1.2
 	if player.is_on_floor():
 		player._velocity.x = lerp(player._velocity.x, 0, player.friction * delta)
 	
@@ -30,7 +28,10 @@ func physics_update(delta: float) -> void:
 		animation_sprite.visible = false
 		player.ischarging = false
 		player.damage_absorbed = 0
-		state_machine.transition_to("Blast")
+		if player.has_sword:
+			state_machine.transition_to("SwordThrow")
+		else:
+			state_machine.transition_to("Blast")
 	elif not Input.is_action_pressed(player.moveList[4]):
 		player.damage_absorbed = 0
 		animation_sprite.visible = false

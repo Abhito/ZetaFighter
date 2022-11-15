@@ -6,6 +6,8 @@ onready var animation_player:AnimationPlayer = get_node(_animation_player)
 func enter(_msg := {}) -> void:
 	if _msg.has("do_more"):
 		animation_player.play("ExtendedHurt")
+		if player.has_sword:
+			player.sword_forced()
 	else:
 		animation_player.play("Hurt")
 
