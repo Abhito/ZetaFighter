@@ -5,8 +5,9 @@ onready var _player2 = $Player2
 onready var _camera = $Camera2D
 onready var _player1health = $CanvasLayer/Control/Player1
 onready var _player2health = $CanvasLayer/Control/Player2
-var characterchosen1 = preload("res://assets/girlFighter.tscn")
-var characterchosen2 = preload("res://assets/cody.tscn")
+var characterchosen1 = load(Character.player1)
+var characterchosen2 = load(Character.player2)
+var lights_on = false
 var moveList1 = ["left_one", "up_one", "right_one", "action1_one", "action2_one"]
 var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"]
 
@@ -34,6 +35,7 @@ func _initialize():
 		character2._change_color()
 	_camera.add_target(_player1.get_child(0))
 	_camera.add_target(_player2.get_child(0))
+	$AnimationPlayer.play("lights")
 
 func setupHealth(var one, var two):
 	_player1health.max_value = one
@@ -47,3 +49,5 @@ func _on_Button_pressed():
 func _physics_process(delta):
 	if _player1health.value <= 0 or _player2health.value <= 0:
 		get_tree().change_scene("res://views/Menu.tscn")
+
+

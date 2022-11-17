@@ -30,5 +30,5 @@ func physics_update(delta: float) -> void:
 	if next_state and player.can_input and action_pressed:
 		state_machine.transition_to(next_state)
 	
-	if not animation_player.is_playing() or player.get_input_direction() != 0.0:
+	if not animation_player.is_playing():
 		state_machine.transition_to("Idle")

@@ -14,4 +14,8 @@ func _ready():
 
 
 func _on_playButton_pressed():
-	get_tree().change_scene("res://views/FightArea.tscn")
+	get_tree().change_scene("res://views/CharacterSelect.tscn")
+
+
+func _on_settingButton_pressed():
+	get_tree().change_scene("res://views/Settings.tscn")

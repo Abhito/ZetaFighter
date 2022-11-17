@@ -75,6 +75,8 @@ func hit(value):
 		hurt = false
 		if damage_absorbed > 200:
 			hurt = true
+		else:
+			position.x -= 10 * _pivot.scale.x
 	else:
 		hurt = true
 	if value > 150:
