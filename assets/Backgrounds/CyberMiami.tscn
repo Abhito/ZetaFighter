@@ -1,0 +1,195 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/Backgrounds/CyberCity.gd" type="Script" id=1]
+[ext_resource path="res://images/Stages/Cyber Miami/highway.png" type="Texture" id=2]
+[ext_resource path="res://images/Stages/Cyber Miami/Buildings.png" type="Texture" id=3]
+[ext_resource path="res://images/Stages/Cyber Miami/Trees.png" type="Texture" id=4]
+[ext_resource path="res://music/cyberpunk-street.wav" type="AudioStream" id=5]
+[ext_resource path="res://images/Stages/Cyber Miami/clouds.png" type="Texture" id=6]
+[ext_resource path="res://assets/Backgrounds/CloudLayer.gd" type="Script" id=7]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+// Which color you want to change
+uniform vec4 u_color_key : hint_color;
+// Which color to replace it with
+uniform vec4 u_replacement_color : hint_color;
+// How much tolerance for the replacement color (between 0 and 1)
+uniform float u_tolerance;
+
+void fragment() {
+    // Get color from the sprite texture at the current pixel we are rendering
+    vec4 original_color = texture(TEXTURE, UV);
+    vec3 col = original_color.rgb;
+    // Get a rough degree of difference between the texture color and the color key
+    vec3 diff3 = col - u_color_key.rgb;
+    float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+    // Change color of pixels below tolerance threshold, while keeping shades if any (a bit naive, there may better ways)
+    float brightness = length(col);
+    col = mix(col, u_replacement_color.rgb * brightness, step(m, u_tolerance));
+    // Assign final color for the pixel, and preserve transparency
+    COLOR = vec4(col.rgb, original_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 1 )
+shader_param/u_color_key = Color( 0.941176, 0.462745, 0.168627, 1 )
+shader_param/u_replacement_color = Color( 1.50196, 0.588235, 0, 1 )
+shader_param/u_tolerance = 0.3
+
+[sub_resource type="Shader" id=14]
+code = "shader_type canvas_item;
+// Which color you want to change
+uniform vec4 u_color_key : hint_color;
+// Which color to replace it with
+uniform vec4 u_replacement_color : hint_color;
+// How much tolerance for the replacement color (between 0 and 1)
+uniform float u_tolerance;
+
+void fragment() {
+    // Get color from the sprite texture at the current pixel we are rendering
+    vec4 original_color = texture(TEXTURE, UV);
+    vec3 col = original_color.rgb;
+    // Get a rough degree of difference between the texture color and the color key
+    vec3 diff3 = col - u_color_key.rgb;
+    float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+    // Change color of pixels below tolerance threshold, while keeping shades if any (a bit naive, there may better ways)
+    float brightness = length(col);
+    col = mix(col, u_replacement_color.rgb * brightness, step(m, u_tolerance));
+    // Assign final color for the pixel, and preserve transparency
+    COLOR = vec4(col.rgb, original_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+shader_param/u_color_key = Color( 1, 0.501961, 0.00784314, 1 )
+shader_param/u_replacement_color = Color( 1, 0.588235, 0, 1 )
+shader_param/u_tolerance = 0.3
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 1 )
+shader_param/u_color_key = Color( 0.764706, 0.827451, 0.0862745, 1 )
+shader_param/u_replacement_color = Color( 1.50196, 1.50196, 0, 1 )
+shader_param/u_tolerance = 0.3
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ParallaxBackground/CloudLayer/Cloud:material:shader_param/u_replacement_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1.50196, 0.00392157, 0.00392157, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ParallaxBackground/ParallaxLayer3/Sprite:material:shader_param/u_replacement_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.588235, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ParallaxBackground/ParallaxLayer2/Sprite:material:shader_param/u_replacement_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1.50196, 0.588235, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "lights"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ParallaxBackground/ParallaxLayer2/Sprite:material:shader_param/u_replacement_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.59, 0, 1 ), Color( 2, 0.59, 0, 1 ), Color( 2, 0.59, 0, 1 ), Color( 1, 0.59, 0, 1 ) ]
+}
+
+[sub_resource type="Environment" id=17]
+background_mode = 4
+glow_enabled = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
+glow_hdr_luminance_cap = 2.0
+glow_bicubic_upscale = true
+
+[node name="Background" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="CloudLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 1 )
+motion_mirroring = Vector2( 1344, 0 )
+script = ExtResource( 7 )
+
+[node name="Cloud" type="Sprite" parent="ParallaxBackground/CloudLayer"]
+position = Vector2( 672, 360 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 1536, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+material = SubResource( 18 )
+position = Vector2( 664, 360 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1344, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+material = SubResource( 15 )
+position = Vector2( 672, 392 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1344, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+material = SubResource( 16 )
+position = Vector2( 184, 480 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 12 )
+anims/lights = SubResource( 13 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 17 )

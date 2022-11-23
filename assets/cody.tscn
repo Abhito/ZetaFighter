@@ -2076,6 +2076,7 @@ light_mask = 12
 position = Vector2( 0, 33 )
 scale = Vector2( 0.35, 0.35 )
 frames = SubResource( 37 )
+frame = 1
 playing = true
 offset = Vector2( 0, -140 )
 

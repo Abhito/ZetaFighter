@@ -1,7 +1,15 @@
 extends Control
 
-var list = ["default", "Lucy", "Cody"]
+var list = ["Random", "Lucy", "Cody"]
 var characters = ["res://assets/girlFighter.tscn", "res://assets/girlFighter.tscn", "res://assets/cody.tscn"]
+
+var stageList = ["Random Stage", "Cyber City", "Cyber Miami"]
+var stages = ["res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberMiami.tscn"]
+var numStage = 0
+var stageTotal = 3
+var stageready = false
+var lastPlayer = 0
+
 var num1 = 0
 var num2 = 0
 var total = 3
@@ -16,9 +24,22 @@ onready var sprite2 = $Player2/Player2
 onready var label2 = $Player2/Label
 onready var player = $AnimationPlayer
 onready var starting = $Starting
+onready var glow = $TextureRect/AnimationPlayer
 
+onready var player1arrows = $Player1/Arrows
+onready var player2arrows = $Player2/Arrows
+onready var stagearrows = $StageSelect/Arrows
+
+onready var stageSprite = $StageSelect/Panel/StageSprite
+onready var stageLabel = $StageSelect/Label
+
+func _ready():
+	glow.play("glow")
+	$Glower.play("arrow_glow")
+	
 func _physics_process(delta):
 	num_check()
+	stage_change()
 	if !ready1:
 		if Input.is_action_just_pressed("left_one"):
 			num1 = num1 - 1
@@ -29,35 +50,75 @@ func _physics_process(delta):
 			num2 = num2 - 1
 		elif Input.is_action_just_pressed("right_two"):
 			num2 = num2 + 1
-	if Input.is_action_just_pressed("action1_one"):
-		ready1 = true
-	elif Input.is_action_just_pressed("action2_one"):
-		ready1 = false
-	if Input.is_action_just_pressed("action1_two"):
-		ready2 = true
-	elif Input.is_action_just_pressed("action2_two"):
-		ready2 = false
+	
+	if !(ready1 and ready2):
+		stagearrows.visible = false
+		if Input.is_action_just_pressed("action1_one"):
+			ready1 = true
+			lastPlayer = 1
+			if ready2:
+				$labelMover.play("Player2")
+		elif Input.is_action_just_pressed("action2_one"):
+			ready1 = false
+		if Input.is_action_just_pressed("action1_two"):
+			ready2 = true
+			lastPlayer = 2
+			if ready1:
+				$labelMover.play("Player1")
+		elif Input.is_action_just_pressed("action2_two"):
+			ready2 = false
 	sprite_change()
 	
 	if ready1:
+		player1arrows.visible = false
 		ready1label.visible = true
-		Character.player1 = characters[num1]
+		Match.player1 = characters[num1]
 	else:
+		player1arrows.visible = true
 		ready1label.visible = false
 		
 	if ready2:
+		player2arrows.visible = false
 		ready2label.visible = true
-		Character.player2 = characters[num2]
+		Match.player2 = characters[num2]
 	else:
+		player2arrows.visible = true
 		ready2label.visible = false
 	
-	if ready1 and ready2:
+	if stageready:
+		stagearrows.visible = false
+		Match.stage = stages[numStage]
 		starting.visible = true
 		player.play("Loading")
 	else:
 		starting.visible = false
 		player.stop()
 
+func stage_change():
+	if ready1 and ready2:
+		stagearrows.visible = true
+		if lastPlayer == 2:
+			if Input.is_action_just_pressed("left_one"):
+				numStage = numStage - 1
+			elif Input.is_action_just_pressed("right_one"):
+				numStage = numStage + 1
+			if Input.is_action_just_pressed("action1_one"):
+				stageready = true
+			if !stageready:
+				if Input.is_action_just_pressed("action2_one"):
+					$labelMover.play("Player1_not")
+					ready1 = false
+		else:
+			if Input.is_action_just_pressed("left_two"):
+				numStage = numStage - 1
+			elif Input.is_action_just_pressed("right_two"):
+				numStage = numStage + 1
+			if Input.is_action_just_pressed("action1_two"):
+				stageready = true
+			if !stageready:
+				if Input.is_action_just_pressed("action2_two"):
+					$labelMover.play("Player2_not")
+					ready2 = false
 func num_check():
 	if num1 >= total:
 		var difference = num1 - total
@@ -69,6 +130,11 @@ func num_check():
 		num2 = difference
 	elif num2 < 0:
 		num2 = total + num2
+	if numStage >= stageTotal:
+		var difference = numStage - stageTotal
+		numStage = difference
+	elif numStage < 0:
+		numStage = stageTotal + numStage
 
 func sprite_change():
 	if(num1 < total && num1 > -1):
@@ -77,6 +143,9 @@ func sprite_change():
 	if(num2 < total && num2 > -1):
 		sprite2.play(list[num2])
 		label2.text = list[num2]
+	if(numStage < stageTotal && numStage > -1):
+		stageSprite.play(stageList[numStage])
+		stageLabel.text = stageList[numStage]
 
 
 func changescene():

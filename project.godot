@@ -50,7 +50,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Character="*res://scripts/character.gd"
+Match="*res://scripts/match.gd"
 
 [debug]
 
