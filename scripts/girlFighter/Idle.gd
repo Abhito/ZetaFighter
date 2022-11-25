@@ -7,11 +7,12 @@ func enter(_msg := {}) -> void:
 	animation_player.play("Idle")
 
 func physics_update(delta: float) -> void:
-	if not player.is_on_floor():
+	if not player.is_on_floor() and player.global_position.y  < 600 :
 		state_machine.transition_to("Fall")
 		return
 	
 	player._velocity.x = 0
+	player._velocity.y += player.gravity * delta
 	player._velocity = player.move_and_slide(player._velocity, Vector2.UP)
 	player._jump_made = 0
 	if player.hurt == true:
@@ -20,13 +21,13 @@ func physics_update(delta: float) -> void:
 		else:
 			state_machine.transition_to("Hurt")
 			
-	if Input.is_action_pressed(player.moveList[4]):
+	if player.moves[4]:
 		state_machine.transition_to("Charge")
 	elif player.dash_count > 1 && player.dash.can_dash:
 		state_machine.transition_to("Dash")
-	elif Input.is_action_just_pressed(player.moveList[1]):
+	elif player.moves[1]:
 		state_machine.transition_to("Jump", {do_jump = true})
-	elif Input.is_action_just_pressed(player.moveList[3]):
+	elif player.moves[3]:
 		state_machine.transition_to("Attack1")
 	elif not is_zero_approx(player.get_input_direction()):
 		state_machine.transition_to("Walk")

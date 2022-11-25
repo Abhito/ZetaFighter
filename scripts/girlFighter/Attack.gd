@@ -24,7 +24,7 @@ func physics_update(delta: float) -> void:
 		else:
 			state_machine.transition_to("Hurt")
 
-	if Input.is_action_just_pressed(player.moveList[3]):
+	if player.moves[3]:
 		action_pressed = true
 	
 	if next_state and player.can_input and action_pressed:

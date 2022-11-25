@@ -20,19 +20,19 @@ func physics_update(delta: float) -> void:
 	player._velocity.y += player.gravity * delta * .3
 	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
 	
-	if player.hurt == true:
-		player.damage_absorbed = 0
+	if player.hurt_big == true:
+		player.damage_absorbed = min(100, player.damage_absorbed)
 		animation_sprite.visible = false
 		player.ischarging = false
 		state_machine.transition_to("Hurt", {do_more = true})
 	
-	if Input.is_action_just_pressed(player.moveList[3]):
+	if player.moves[3]:
 		animation_sprite.visible = false
 		player.ischarging = false
-		player.damage_absorbed = 0
+		player.damage_absorbed = min(100, player.damage_absorbed)
 		state_machine.transition_to("Blast")
-	elif not Input.is_action_pressed(player.moveList[4]):
-		player.damage_absorbed = 0
+	elif not player.moves[4]:
+		player.damage_absorbed = min(100, player.damage_absorbed)
 		animation_sprite.visible = false
 		player.ischarging = false
 		state_machine.transition_to("Idle")

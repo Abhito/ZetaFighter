@@ -4,14 +4,16 @@ export (NodePath) var _animation_player
 onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 func enter(_msg := {}) -> void:
+	player.ischarging = false
 	animation_player.play("Idle")
 
 func physics_update(delta: float) -> void:
-	if not player.is_on_floor():
+	if not player.is_on_floor() and player.global_position.y  < 600:
 		state_machine.transition_to("Fall")
 		return
 	
 	player._velocity.x = 0
+	player._velocity.y += player.gravity * delta
 	player._velocity = player.move_and_slide(player._velocity, Vector2.UP)
 	player._jump_made = 0
 	if player.hurt == true:

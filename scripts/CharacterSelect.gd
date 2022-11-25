@@ -1,7 +1,7 @@
 extends Control
 
-var list = ["Random", "Lucy", "Cody"]
-var characters = ["res://assets/girlFighter.tscn", "res://assets/girlFighter.tscn", "res://assets/cody.tscn"]
+var list = ["Random", "Lucy", "Cody", "Zeta Hero"]
+var characters = ["res://assets/girlFighter.tscn", "res://assets/girlFighter.tscn", "res://assets/cody.tscn", "res://assets/heroFighter.tscn"]
 
 var stageList = ["Random Stage", "Cyber City", "Cyber Miami"]
 var stages = ["res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberMiami.tscn"]
@@ -12,7 +12,7 @@ var lastPlayer = 0
 
 var num1 = 0
 var num2 = 0
-var total = 3
+var total = 4
 var ready1 = false
 var ready2 = false
 
@@ -32,6 +32,8 @@ onready var stagearrows = $StageSelect/Arrows
 
 onready var stageSprite = $StageSelect/Panel/StageSprite
 onready var stageLabel = $StageSelect/Label
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	glow.play("glow")
@@ -72,7 +74,11 @@ func _physics_process(delta):
 	if ready1:
 		player1arrows.visible = false
 		ready1label.visible = true
-		Match.player1 = characters[num1]
+		var num = num1
+		if num == 0:
+			num = rng.randi_range(1, total - 1)
+		Match.player1 = characters[num]
+		Match.name1 = list[num]
 	else:
 		player1arrows.visible = true
 		ready1label.visible = false
@@ -80,14 +86,21 @@ func _physics_process(delta):
 	if ready2:
 		player2arrows.visible = false
 		ready2label.visible = true
-		Match.player2 = characters[num2]
+		var num = num2
+		if num == 0:
+			num = rng.randi_range(1, total - 1)
+		Match.player2 = characters[num]
+		Match.name2 = list[num]
 	else:
 		player2arrows.visible = true
 		ready2label.visible = false
 	
 	if stageready:
+		var num = numStage
+		if numStage == 0:
+			num = rng.randi_range(1, stageTotal - 1)
 		stagearrows.visible = false
-		Match.stage = stages[numStage]
+		Match.stage = stages[num]
 		starting.visible = true
 		player.play("Loading")
 	else:
@@ -95,7 +108,7 @@ func _physics_process(delta):
 		player.stop()
 
 func stage_change():
-	if ready1 and ready2:
+	if ready1 and ready2 and !stageready:
 		stagearrows.visible = true
 		if lastPlayer == 2:
 			if Input.is_action_just_pressed("left_one"):

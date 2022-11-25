@@ -22,6 +22,7 @@ var spawn_blast = false
 var hurt = false
 var hurt_big = false
 var health = 1500
+var dead = false
 var charge = .35
 var ischarging = false
 var has_sword = true
@@ -43,6 +44,8 @@ var _other_player = null
 var myNumber = 0
 var health_bar = null
 var moveList = []
+var moves = [false, false, false, false, false]
+var isAI = false
 
 
 func get_input_direction() -> float:
@@ -75,6 +78,7 @@ func hit(value):
 		hurt = false
 		if damage_absorbed > 200:
 			hurt = true
+			hurt_big = true
 		else:
 			position.x -= 10 * _pivot.scale.x
 	else:
@@ -82,7 +86,12 @@ func hit(value):
 	if value > 150:
 		hurt_big = true
 	health -= value
-	health_bar.value = health
+	if health <= 0:
+		health_bar.value = 0.01
+		dead = true
+	else:
+		health_bar.value = health
+		health_bar.makeShake()
 
 func fire():
 	spawn_blast = false
@@ -125,6 +134,7 @@ func sword_forced():
 	get_tree().current_scene.add_child(proj)
 	
 func _physics_process(delta: float) -> void:
+	pressing()
 	if !has_sword:
 		$Position2D/Sword.visible = false
 		jump_strength = 1200
@@ -142,18 +152,46 @@ func _physics_process(delta: float) -> void:
 		if dash_count > 1: 
 			dash_direction = -1 * _pivot.scale.x
 	_infront_check()
+	if(damage_absorbed > 0):
+		damage_absorbed -= delta * 10
 	manage_ki()
-	
+
+func pressing():
+	if Input.is_action_just_pressed(moveList[0]):
+		moves[0] = true
+	else:
+		moves[0] = false
+	if Input.is_action_just_pressed(moveList[1]):
+		moves[1] = true
+	else:
+		moves[1] = false
+	if Input.is_action_just_pressed(moveList[2]):
+		moves[2] = true
+	else:
+		moves[2] = false
+	if Input.is_action_just_pressed(moveList[3]):
+		moves[3] = true
+	else:
+		moves[3] = false
+	if Input.is_action_pressed(moveList[4]):
+		moves[4] = true
+	else:
+		moves[4] = false		
 			
 
 func manage_ki():
 	ki.scale.x = charge - (damage_absorbed * .0015)
 	ki.scale.y = charge - (damage_absorbed * .0015)
+	
+	
 func _infront_check():
 	if _other_player.get_global_position().x < _pivot.get_global_position().x:
 		_pivot.scale.x = -1
 	elif _other_player.get_global_position().x > _pivot.get_global_position().x:
 		_pivot.scale.x = 1
+		
+func isdead():
+	health_bar.value = 0
 		
 
 

@@ -17,6 +17,8 @@ var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CanvasLayer/Control/Player1/Label.text = Match.name1
+	$CanvasLayer/Control/Player2/Label.text = Match.name2
 	_initialize()
 	
 	
@@ -53,5 +55,10 @@ func _on_Button_pressed():
 func _physics_process(delta):
 	if _player1health.value <= 0 or _player2health.value <= 0:
 		get_tree().change_scene("res://views/Menu.tscn")
+	elif _player1health.value == .01:
+		if(_camera.targets.size() > 1):
+			_camera.targets.remove(0)
+	elif _player2health.value == .01:
+		_camera.targets.remove(1)
 
 

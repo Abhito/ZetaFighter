@@ -22,11 +22,11 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Hurt", {do_more = true})
 		else:
 			state_machine.transition_to("Hurt")
-	if Input.is_action_pressed(player.moveList[4]):
+	if player.moves[4]:
 		state_machine.transition_to("Charge")
-	elif Input.is_action_just_pressed(player.moveList[1]):
+	elif player.moves[1]:
 		state_machine.transition_to("Jump", {do_jump = true})
-	elif Input.is_action_just_pressed(player.moveList[3]):
+	elif player.moves[3]:
 		state_machine.transition_to("Attack1")
 	elif player.dash_count > 1 && player.dash.can_dash:
 		state_machine.transition_to("Dash")

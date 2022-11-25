@@ -4,7 +4,7 @@
 [ext_resource path="res://images/Stages/Cyber Miami/highway.png" type="Texture" id=2]
 [ext_resource path="res://images/Stages/Cyber Miami/Buildings.png" type="Texture" id=3]
 [ext_resource path="res://images/Stages/Cyber Miami/Trees.png" type="Texture" id=4]
-[ext_resource path="res://music/cyberpunk-street.wav" type="AudioStream" id=5]
+[ext_resource path="res://music/West.wav" type="AudioStream" id=5]
 [ext_resource path="res://images/Stages/Cyber Miami/clouds.png" type="Texture" id=6]
 [ext_resource path="res://assets/Backgrounds/CloudLayer.gd" type="Script" id=7]
 

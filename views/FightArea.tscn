@@ -1,8 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Themes/health_bar.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/FightArea.gd" type="Script" id=2]
 [ext_resource path="res://scripts/CameraController.gd" type="Script" id=3]
+[ext_resource path="res://fonts/Franklin Gothic Medium Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scripts/health.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.995192, 1 )
@@ -45,22 +53,46 @@ margin_bottom = 720.0
 text = "Back"
 
 [node name="Player1" type="ProgressBar" parent="CanvasLayer/Control"]
-margin_left = 64.0
+margin_left = 32.0
+margin_top = 8.0
 margin_right = 512.0
-margin_bottom = 64.0
+margin_bottom = 56.0
 theme = ExtResource( 1 )
 percent_visible = false
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Player1"]
+margin_left = 32.0
+margin_top = 48.0
+margin_right = 120.0
+margin_bottom = 72.0
+grow_horizontal = 0
+custom_colors/font_color = Color( 0.964706, 1, 0.494118, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Character"
 
 [node name="Player2" type="ProgressBar" parent="CanvasLayer/Control"]
 anchor_top = 0.011
 anchor_bottom = 0.011
-margin_left = 1216.0
-margin_top = -8.008
-margin_right = 1664.0
-margin_bottom = 55.992
+margin_left = 1247.0
+margin_top = -0.00800037
+margin_right = 1726.0
+margin_bottom = 47.992
 rect_scale = Vector2( -1, 1 )
 theme = ExtResource( 1 )
 percent_visible = false
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Player2"]
+margin_left = 119.0
+margin_top = 48.0
+margin_right = 207.0
+margin_bottom = 72.0
+rect_scale = Vector2( -1, 1 )
+custom_colors/font_color = Color( 0.964706, 1, 0.494118, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Character"
+align = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 640, 544 )

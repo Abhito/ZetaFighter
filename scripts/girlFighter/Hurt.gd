@@ -10,6 +10,8 @@ func enter(_msg := {}) -> void:
 		animation_player.play("Hurt")
 
 func physics_update(delta: float) -> void:
+	if player.dead:
+		state_machine.transition_to("Death")
 	player._velocity.x = 0
 	player._velocity.y += player.gravity * delta
 	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)

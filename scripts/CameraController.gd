@@ -36,8 +36,8 @@ func _process (delta):
 func add_target(t):
 	if not t in targets:
 		targets.append(t)
-	print("Added " + targets[0].name)
 		
 func remove_target(t):
 	if t in targets:
+		print("removed target" )
 		targets.remove(t)
