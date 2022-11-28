@@ -36,10 +36,14 @@ onready var stageLabel = $StageSelect/Label
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	if Match.aiMode:
+		ready2 = true
 	glow.play("glow")
 	$Glower.play("arrow_glow")
 	
 func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://views/Menu.tscn")
 	num_check()
 	stage_change()
 	if !ready1:
@@ -58,17 +62,21 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("action1_one"):
 			ready1 = true
 			lastPlayer = 1
-			if ready2:
+			if ready2 and not Match.aiMode:
 				$labelMover.play("Player2")
+			elif Match.aiMode:
+				lastPlayer = 2
+				$labelMover.play("Player1")
 		elif Input.is_action_just_pressed("action2_one"):
 			ready1 = false
-		if Input.is_action_just_pressed("action1_two"):
-			ready2 = true
-			lastPlayer = 2
-			if ready1:
-				$labelMover.play("Player1")
-		elif Input.is_action_just_pressed("action2_two"):
-			ready2 = false
+		if not Match.aiMode: #If not in AI mode than player two can set
+			if Input.is_action_just_pressed("action1_two"):
+				ready2 = true
+				lastPlayer = 2
+				if ready1:
+					$labelMover.play("Player1")
+			elif Input.is_action_just_pressed("action2_two"):
+				ready2 = false
 	sprite_change()
 	
 	if ready1:
@@ -90,7 +98,14 @@ func _physics_process(delta):
 		if num == 0:
 			num = rng.randi_range(1, total - 1)
 		Match.player2 = characters[num]
-		Match.name2 = list[num]
+		if Match.aiMode:
+			if num > 1:
+				Match.aiMelee = true
+			else:
+				Match.aiMelee = false
+			Match.name2 = "AI - " + list[num]
+		else:
+			Match.name2 = list[num]
 	else:
 		player2arrows.visible = true
 		ready2label.visible = false

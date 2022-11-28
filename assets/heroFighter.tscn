@@ -1,7 +1,8 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://images/characters/character_3/HeroWalk.png" type="Texture" id=1]
 [ext_resource path="res://scripts/heroFighter.gd" type="Script" id=2]
+[ext_resource path="res://images/characters/character_3/HeroBlast.png" type="Texture" id=3]
 [ext_resource path="res://images/characters/character_3/HeroIdle.png" type="Texture" id=4]
 [ext_resource path="res://images/characters/character_3/HeroHurt.png" type="Texture" id=5]
 [ext_resource path="res://images/characters/character_3/HeroAttack.png" type="Texture" id=6]
@@ -16,7 +17,7 @@
 [ext_resource path="res://images/characters/particles/blueki.png" type="Texture" id=15]
 [ext_resource path="res://assets/hero_scripts/Charge.gd" type="Script" id=16]
 [ext_resource path="res://images/characters/character_3/HeroCharge.png" type="Texture" id=17]
-[ext_resource path="res://images/characters/character_1/GirlFighterBlast.png" type="Texture" id=18]
+[ext_resource path="res://scripts/girlFighter/Blast.gd" type="Script" id=18]
 [ext_resource path="res://scripts/girlFighter/Death.gd" type="Script" id=19]
 [ext_resource path="res://assets/Dash.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scripts/girlFighter/Dash.gd" type="Script" id=22]
@@ -25,12 +26,10 @@
 extents = Vector2( 8, 8 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 238, 204 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 204, 238, 204 )
 
@@ -489,7 +488,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id=39]
 resource_name = "Blast"
-length = 0.4
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Position2D/Sprite:texture")
 tracks/0/interp = 1
@@ -500,7 +499,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 18 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Position2D/Sprite:hframes")
@@ -512,7 +511,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1 ]
+"values": [ 2 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Position2D/Sprite:vframes")
@@ -536,7 +535,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 0, 2 ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath(".")
@@ -545,7 +544,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -559,10 +558,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 28, 8 ), Vector2( 28, 8 ) ]
+"values": [ Vector2( 28, 8 ), Vector2( 36, 8 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath(".")
@@ -571,7 +570,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -1317,6 +1316,7 @@ light_mask = 12
 position = Vector2( 0, 33 )
 scale = Vector2( 0.45, 0.45 )
 frames = SubResource( 37 )
+frame = 1
 playing = true
 offset = Vector2( 0, -100 )
 
@@ -1411,6 +1411,10 @@ _animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource( 19 )
+_animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Blast" type="Node" parent="StateMachine"]
+script = ExtResource( 18 )
 _animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Dash" parent="." instance=ExtResource( 20 )]

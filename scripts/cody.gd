@@ -46,13 +46,14 @@ var health_bar = null
 var moveList = []
 var moves = [false, false, false, false, false]
 var isAI = false
-
+var _horizontal_direction = 0
 
 func get_input_direction() -> float:
 	if not can_input:
 		return 0.0
-	var _horizontal_direction = 0
-	_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
+	if !isAI:
+		_horizontal_direction = 0
+		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
 	
 	
@@ -61,6 +62,8 @@ func _setup(_player, number, healthbar, myMoves):
 	myNumber = number
 	health_bar = healthbar
 	moveList = myMoves
+	if myNumber == 2 and Match.aiMode:
+		isAI = true
 
 func _change_color():
 	_animation_sprite.modulate = Color8(255,200,200)
@@ -141,12 +144,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Position2D/Sword.visible = true
 		jump_strength = 1000
-	if Input.is_action_just_pressed(moveList[0]):
+	if moves[0]:
 		timer.start()
 		dash_count = dash_count + 1
 		if dash_count > 1: 
 			dash_direction = 1 * _pivot.scale.x
-	if Input.is_action_just_pressed(moveList[2]):
+	if moves[2]:
 		timer.start()
 		dash_count = dash_count + 1
 		if dash_count > 1: 
@@ -157,26 +160,27 @@ func _physics_process(delta: float) -> void:
 	manage_ki()
 
 func pressing():
-	if Input.is_action_just_pressed(moveList[0]):
-		moves[0] = true
-	else:
-		moves[0] = false
-	if Input.is_action_just_pressed(moveList[1]):
-		moves[1] = true
-	else:
-		moves[1] = false
-	if Input.is_action_just_pressed(moveList[2]):
-		moves[2] = true
-	else:
-		moves[2] = false
-	if Input.is_action_just_pressed(moveList[3]):
-		moves[3] = true
-	else:
-		moves[3] = false
-	if Input.is_action_pressed(moveList[4]):
-		moves[4] = true
-	else:
-		moves[4] = false		
+	if !isAI:
+		if Input.is_action_just_pressed(moveList[0]):
+			moves[0] = true
+		else:
+			moves[0] = false
+		if Input.is_action_just_pressed(moveList[1]):
+			moves[1] = true
+		else:
+			moves[1] = false
+		if Input.is_action_just_pressed(moveList[2]):
+			moves[2] = true
+		else:
+			moves[2] = false
+		if Input.is_action_just_pressed(moveList[3]):
+			moves[3] = true
+		else:
+			moves[3] = false
+		if Input.is_action_pressed(moveList[4]):
+			moves[4] = true
+		else:
+			moves[4] = false		
 			
 
 func manage_ki():

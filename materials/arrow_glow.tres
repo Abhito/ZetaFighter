@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/u_color_key = Color( 0.882353, 0.615686, 0.0980392, 1 )
-shader_param/u_replacement_color = Color( 1.05832, 0.5, 0, 1 )
+shader_param/u_replacement_color = Color( 1.5, 0.5, 0, 1 )
 shader_param/u_tolerance = 0.3

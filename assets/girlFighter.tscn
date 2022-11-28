@@ -27,12 +27,10 @@
 extents = Vector2( 9, 9 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 238, 204 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 204, 238, 204 )
 

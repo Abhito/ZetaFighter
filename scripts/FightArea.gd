@@ -9,6 +9,7 @@ onready var _player2health = $CanvasLayer/Control/Player2
 var characterchosen1 = load(Match.player1)
 var characterchosen2 = load(Match.player2)
 var stageInstance = load(Match.stage)
+var ai = preload("res://assets/AIController.tscn")
 var lights_on = false
 var moveList1 = ["left_one", "up_one", "right_one", "action1_one", "action2_one"]
 var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"]
@@ -19,9 +20,34 @@ var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"
 func _ready():
 	$CanvasLayer/Control/Player1/Label.text = Match.name1
 	$CanvasLayer/Control/Player2/Label.text = Match.name2
-	_initialize()
+	if !Match.aiMode:
+		_initialize()
+	else:
+		_aiInitialize()
 	
 	
+func _aiInitialize():
+	var stage = stageInstance.instance()
+	add_child(stage)
+	stage.start()
+	var sameCharacter = false
+	if characterchosen1 == characterchosen2:
+		sameCharacter = true
+	var character1 = characterchosen1.instance()
+	var character2 = characterchosen2.instance()
+	var aiController = ai.instance()
+	
+	_player1.add_child(character1)
+	_player2.add_child(character2)
+	_player2.add_child(aiController)
+	character1._setup(character2, 1, _player1health, moveList1)
+	character2._setup(character1, 2, _player2health, moveList2)
+	aiController.setup(character2, character1)
+	setupHealth(character1.health, character2.health)
+	if sameCharacter:
+		character2._change_color()
+	_camera.add_target(_player1.get_child(0))
+	_camera.add_target(_player2.get_child(0))
 
 func _initialize():
 	var stage = stageInstance.instance()
@@ -60,5 +86,7 @@ func _physics_process(delta):
 			_camera.targets.remove(0)
 	elif _player2health.value == .01:
 		_camera.targets.remove(1)
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://views/Menu.tscn")
 
 

@@ -31,12 +31,10 @@
 [sub_resource type="RectangleShape2D" id=33]
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 319, 297 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 297, 319, 297 )
 

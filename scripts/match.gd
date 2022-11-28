@@ -7,3 +7,6 @@ var name2 = ""
 
 var stage = "res://assets/Backgrounds/CyberMiami.tscn"
 var stagePlayer = "lights"
+
+var aiMode = false
+var aiMelee = false

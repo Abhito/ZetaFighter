@@ -46,6 +46,7 @@ margin_right = 1280.0
 margin_bottom = 728.0
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
+visible = false
 margin_left = 1160.0
 margin_top = 688.0
 margin_right = 1280.0

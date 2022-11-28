@@ -1,4 +1,4 @@
-class_name girlFighter
+
 extends KinematicBody2D
 
 const UP_Direction := Vector2.UP
@@ -45,12 +45,14 @@ var health_bar = null
 var moveList = []
 var moves = [false, false, false, false, false]
 var isAI = false
+var _horizontal_direction = 0
 
 func get_input_direction() -> float:
 	if not can_input:
 		return 0.0
-	var _horizontal_direction = 0
-	_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
+	if !isAI:
+		_horizontal_direction = 0
+		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
 	
 	
@@ -59,6 +61,9 @@ func _setup(_player, number, healthbar, myMoves):
 	myNumber = number
 	health_bar = healthbar
 	moveList = myMoves
+	if myNumber == 2 and Match.aiMode:
+		isAI = true
+	
 
 func _change_color():
 	_animation_sprite.modulate = Color8(255,200,200)
@@ -125,26 +130,27 @@ func _physics_process(delta: float) -> void:
 
 #this method handles player input
 func pressing():
-	if Input.is_action_just_pressed(moveList[0]):
-		moves[0] = true
-	else:
-		moves[0] = false
-	if Input.is_action_just_pressed(moveList[1]):
-		moves[1] = true
-	else:
-		moves[1] = false
-	if Input.is_action_just_pressed(moveList[2]):
-		moves[2] = true
-	else:
-		moves[2] = false
-	if Input.is_action_just_pressed(moveList[3]):
-		moves[3] = true
-	else:
-		moves[3] = false
-	if Input.is_action_pressed(moveList[4]):
-		moves[4] = true
-	else:
-		moves[4] = false	
+	if !isAI:
+		if Input.is_action_just_pressed(moveList[0]):
+			moves[0] = true
+		else:
+			moves[0] = false
+		if Input.is_action_just_pressed(moveList[1]):
+			moves[1] = true
+		else:
+			moves[1] = false
+		if Input.is_action_just_pressed(moveList[2]):
+			moves[2] = true
+		else:
+			moves[2] = false
+		if Input.is_action_just_pressed(moveList[3]):
+			moves[3] = true
+		else:
+			moves[3] = false
+		if Input.is_action_pressed(moveList[4]):
+			moves[4] = true
+		else:
+			moves[4] = false	
 		
 func manage_ki():
 	ki.scale.x = charge * .08 + .1

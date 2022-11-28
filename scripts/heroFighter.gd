@@ -4,13 +4,13 @@ const UP_Direction := Vector2.UP
 
 export var speed := 450.0
 
-export var jump_strength := 1300.0
+export var jump_strength := 1200.0
 export var maximum_jumps := 2
 export var double_jump_strength := 1100.0
 export var gravity := 4000.0
 
 const dash_speed := 1200
-const dash_duration := 0.3
+const dash_duration := 0.2
 var dash_count = 0
 var dash_direction = 0
 
@@ -36,7 +36,7 @@ onready var hand_position = get_node("Position2D/ProjPosition")
 onready var dash = $Dash
 onready var timer = $DashTimer
 onready var ki = $Position2D/Ki
-var blast = preload("res://assets/KiProjectile.tscn")
+var blast = preload("res://assets/hero_spark.tscn")
 
 var _other_player = null
 var myNumber = 0
@@ -44,12 +44,14 @@ var health_bar = null
 var moveList = []
 var moves = [false, false, false, false, false]
 var isAI = false
+var _horizontal_direction = 0
 
 func get_input_direction() -> float:
 	if not can_input:
 		return 0.0
-	var _horizontal_direction = 0
-	_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
+	if !isAI:
+		_horizontal_direction = 0
+		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
 	
 	
@@ -58,6 +60,8 @@ func _setup(_player, number, healthbar, myMoves):
 	myNumber = number
 	health_bar = healthbar
 	moveList = myMoves
+	if myNumber == 2 and Match.aiMode:
+		isAI = true
 
 func _change_color():
 	_animation_sprite.modulate = Color8(255,200,200)
@@ -73,7 +77,7 @@ func hit(value):
 		damage_absorbed += value * .9
 		value = value * .1
 		hurt = false
-		if damage_absorbed > 300:
+		if damage_absorbed > 250:
 			hurt = true
 			hurt_big = true
 		else:
@@ -121,26 +125,27 @@ func _physics_process(delta: float) -> void:
 
 #this method handles player input
 func pressing():
-	if Input.is_action_just_pressed(moveList[0]):
-		moves[0] = true
-	else:
-		moves[0] = false
-	if Input.is_action_just_pressed(moveList[1]):
-		moves[1] = true
-	else:
-		moves[1] = false
-	if Input.is_action_just_pressed(moveList[2]):
-		moves[2] = true
-	else:
-		moves[2] = false
-	if Input.is_action_just_pressed(moveList[3]):
-		moves[3] = true
-	else:
-		moves[3] = false
-	if Input.is_action_pressed(moveList[4]):
-		moves[4] = true
-	else:
-		moves[4] = false
+	if !isAI:
+		if Input.is_action_just_pressed(moveList[0]):
+			moves[0] = true
+		else:
+			moves[0] = false
+		if Input.is_action_just_pressed(moveList[1]):
+			moves[1] = true
+		else:
+			moves[1] = false
+		if Input.is_action_just_pressed(moveList[2]):
+			moves[2] = true
+		else:
+			moves[2] = false
+		if Input.is_action_just_pressed(moveList[3]):
+			moves[3] = true
+		else:
+			moves[3] = false
+		if Input.is_action_pressed(moveList[4]):
+			moves[4] = true
+		else:
+			moves[4] = false
 				
 func _infront_check():
 	if _other_player.get_global_position().x < _pivot.get_global_position().x:

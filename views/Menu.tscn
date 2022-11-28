@@ -321,8 +321,7 @@ custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 7 )
 text = "Play"
 
-[node name="settingButton" type="Button" parent="gamebuttons"]
-visible = false
+[node name="aiButton" type="Button" parent="gamebuttons"]
 margin_top = 73.0
 margin_right = 256.0
 margin_bottom = 142.0
@@ -333,7 +332,7 @@ custom_fonts/font = SubResource( 6 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 7 )
-text = "Settings"
+text = "VS AI"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Intro = SubResource( 2 )
@@ -349,4 +348,4 @@ volume_db = -10.0
 autoplay = true
 
 [connection signal="pressed" from="gamebuttons/playButton" to="." method="_on_playButton_pressed"]
-[connection signal="pressed" from="gamebuttons/settingButton" to="." method="_on_settingButton_pressed"]
+[connection signal="pressed" from="gamebuttons/aiButton" to="." method="_on_aiButton_pressed"]

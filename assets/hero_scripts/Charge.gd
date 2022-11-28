@@ -21,8 +21,13 @@ func physics_update(delta: float) -> void:
 		player.damage_absorbed = min(150, player.damage_absorbed)
 		player.ischarging = false
 		state_machine.transition_to("Hurt", {do_more = true})
-		
-	if not player.moves[4]:
+	
+	if player.moves[3]:
+		animation_sprite.visible = false
+		player.ischarging = false
+		player.damage_absorbed = min(150, player.damage_absorbed)
+		state_machine.transition_to("Blast")
+	elif not player.moves[4]:
 		player.damage_absorbed = min(150, player.damage_absorbed)
 		player.ischarging = false
 		state_machine.transition_to("Idle")
