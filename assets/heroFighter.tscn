@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://images/characters/character_3/HeroWalk.png" type="Texture" id=1]
 [ext_resource path="res://scripts/heroFighter.gd" type="Script" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/hero_scripts/Attack.gd" type="Script" id=12]
 [ext_resource path="res://scripts/girlFighter/Hurt.gd" type="Script" id=13]
 [ext_resource path="res://images/characters/character_3/HeroMove.png" type="Texture" id=14]
-[ext_resource path="res://images/characters/particles/blueki.png" type="Texture" id=15]
+[ext_resource path="res://images/characters/particles/HeroKi.png" type="Texture" id=15]
 [ext_resource path="res://assets/hero_scripts/Charge.gd" type="Script" id=16]
 [ext_resource path="res://images/characters/character_3/HeroCharge.png" type="Texture" id=17]
 [ext_resource path="res://scripts/girlFighter/Blast.gd" type="Script" id=18]
@@ -25,20 +25,28 @@
 [sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="AtlasTexture" id=44]
+[sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 238, 204 )
+region = Rect2( 0, 0, 208, 200 )
 
-[sub_resource type="AtlasTexture" id=45]
+[sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 15 )
-region = Rect2( 0, 204, 238, 204 )
+region = Rect2( 208, 0, 208, 200 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 200, 208, 200 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 15 )
+region = Rect2( 208, 200, 208, 200 )
 
 [sub_resource type="SpriteFrames" id=37]
 animations = [ {
-"frames": [ SubResource( 44 ), SubResource( 45 ) ],
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 20.0
 } ]
 
 [sub_resource type="Shader" id=42]
@@ -1292,7 +1300,7 @@ tracks/5/keys = {
 [node name="heroFighter" type="KinematicBody2D"]
 position = Vector2( 24, 32 )
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 script = ExtResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="."]
@@ -1301,7 +1309,7 @@ position = Vector2( 4, 0 )
 [node name="Area2D" type="Area2D" parent="Position2D"]
 position = Vector2( -4, 0 )
 collision_layer = 4
-collision_mask = 7
+collision_mask = 23
 monitoring = false
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Position2D/Area2D"]
@@ -1311,14 +1319,12 @@ disabled = true
 
 [node name="Ki" type="AnimatedSprite" parent="Position2D"]
 visible = false
-modulate = Color( 1, 1, 1.5, 1 )
+self_modulate = Color( 1.50196, 1.50196, 1, 1 )
 light_mask = 12
-position = Vector2( 0, 33 )
-scale = Vector2( 0.45, 0.45 )
+position = Vector2( 4, 0 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
-offset = Vector2( 0, -100 )
 
 [node name="Sprite" type="Sprite" parent="Position2D"]
 material = SubResource( 43 )

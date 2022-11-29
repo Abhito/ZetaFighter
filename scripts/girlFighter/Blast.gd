@@ -4,7 +4,6 @@ export (NodePath) var _animation_player
 onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 func enter(_msg := {}) -> void:
-	player.can_input = false
 	animation_player.play("Blast")
 
 func physics_update(delta: float) -> void:

@@ -23,7 +23,7 @@ var hurt = false
 var hurt_big = false
 var health = 1400
 var dead = false
-var charge = 1
+var charge = .5
 var ischarging = false
 var damage_absorbed = 0
 
@@ -98,8 +98,7 @@ func fire():
 	spawn_blast = false
 	var proj = blast.instance()
 	proj.position = hand_position.global_position
-	proj.size(charge)
-	charge = 1
+	proj.size(0)
 	if _pivot.scale.x == 1:
 		proj.direction = Vector2.RIGHT
 	elif _pivot.scale.x == -1:
@@ -122,6 +121,7 @@ func _physics_process(delta: float) -> void:
 	_infront_check()
 	if(damage_absorbed > 0):
 		damage_absorbed -= delta * 7
+	manage_ki()
 
 #this method handles player input
 func pressing():
@@ -146,6 +146,10 @@ func pressing():
 			moves[4] = true
 		else:
 			moves[4] = false
+			
+func manage_ki():
+	ki.scale.x = charge - (damage_absorbed * .0015)
+	ki.scale.y = charge - (damage_absorbed * .0015)
 				
 func _infront_check():
 	if _other_player.get_global_position().x < _pivot.get_global_position().x:

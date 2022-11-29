@@ -100,6 +100,7 @@ func fire():
 	spawn_blast = false
 	var proj = blast.instance()
 	proj.position = hand_position.global_position
+	proj.modulate = Color8(255,255,383)
 	proj.size(charge)
 	charge = 1
 	if _pivot.scale.x == 1:

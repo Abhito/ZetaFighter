@@ -14,7 +14,9 @@ func size(value):
 	damage = damage * value
 	scale.x = scale.x * value
 	scale.y = scale.y * value
-	if damage > 200:
+	if damage > 350:
+		damage_tier = 4
+	elif damage > 200:
 		damage_tier = 3
 	elif damage > 125:
 		damage_tier = 2

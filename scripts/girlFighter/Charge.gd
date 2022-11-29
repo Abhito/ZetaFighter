@@ -6,6 +6,7 @@ export (NodePath) var _animation_player
 onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 func enter(_msg := {}) -> void:
+	player.hurt = false
 	player.ischarging = true
 	animation_sprite.visible = true
 	animation_player.play("Charge")

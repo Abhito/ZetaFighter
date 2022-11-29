@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://materials/zeta_materials/eye_shader.tres" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/whiten = false
+shader_param/mix_weight = 0.7
+shader_param/u_color_key = Color( 0.678431, 0.133333, 0.133333, 1 )
+shader_param/u_replacement_color = Color( 1, 0.0156863, 0.0156863, 1 )
+shader_param/u_tolerance = 0.1

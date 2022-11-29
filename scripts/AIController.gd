@@ -26,7 +26,7 @@ func _process(delta):
 	var turn = true
 	if can_act:
 		var num = 0
-		if !_other_player.can_input:
+		if !_other_player.can_input && character.damage_absorbed < 150:
 			num = rng.randi_range(1,4)
 			if num < 4:
 				turn = false

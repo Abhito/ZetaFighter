@@ -1,18 +1,18 @@
 extends Control
 
-var list = ["Random", "Lucy", "Cody", "Zeta Hero"]
-var characters = ["res://assets/girlFighter.tscn", "res://assets/girlFighter.tscn", "res://assets/cody.tscn", "res://assets/heroFighter.tscn"]
+var list = ["Random", "Lucy", "Cody", "Zeta Hero", "Epsilon"]
+var characters = ["res://assets/girlFighter.tscn", "res://assets/girlFighter.tscn", "res://assets/cody.tscn", "res://assets/heroFighter.tscn", "res://assets/zetaFighter.tscn"]
 
-var stageList = ["Random Stage", "Cyber City", "Cyber Miami"]
-var stages = ["res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberMiami.tscn"]
+var stageList = ["Random Stage", "Cyber City", "Cyber Miami", "Cyber City - West Side", "Underground Factory"]
+var stages = ["res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberCity.tscn", "res://assets/Backgrounds/CyberMiami.tscn", "res://assets/Backgrounds/CyberStreets.tscn", "res://assets/Backgrounds/BulkHead.tscn"]
 var numStage = 0
-var stageTotal = 3
+var stageTotal = 5
 var stageready = false
 var lastPlayer = 0
 
 var num1 = 0
 var num2 = 0
-var total = 4
+var total = 5
 var ready1 = false
 var ready2 = false
 

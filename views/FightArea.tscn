@@ -12,12 +12,12 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.995192, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.965517, 1 )
 
 [sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+gradient = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 34 )
@@ -114,7 +114,6 @@ position = Vector2( 72, 588 )
 position = Vector2( 1156, 592 )
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
-visible = false
 position = Vector2( 16, 648 )
 collision_mask = 0
 
