@@ -46,7 +46,7 @@ script = ExtResource( 2 )
 light_mask = 12
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 3 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -54,3 +54,7 @@ position = Vector2( 8, -0.000545502 )
 rotation = 1.5708
 scale = Vector2( 0.2, 0.5 )
 shape = SubResource( 9 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

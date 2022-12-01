@@ -9,6 +9,7 @@ export var jump_strength := 1000.0
 export var maximum_jumps := 2
 export var double_jump_strength := 800.0
 export var gravity := 4000.0
+export var id = 1
 
 const dash_speed := 1000
 const dash_duration := 0.2

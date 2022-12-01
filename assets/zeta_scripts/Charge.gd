@@ -26,18 +26,23 @@ func physics_update(delta: float) -> void:
 		player.dash.duration_timer.stop()
 		player.dash.duration_timer.emit_signal("timeout")
 		state_machine.transition_to("Hurt", {do_more = true})
+	elif player.dead:
+		charge_off()
+		player.dash.duration_timer.stop()
+		player.dash.duration_timer.emit_signal("timeout")
+		state_machine.transition_to("Hurt")
 	
 	if player.moves[3] and player.powered:
 		charge_off()
 		player.dash.duration_timer.stop()
 		player.dash.duration_timer.emit_signal("timeout")
 		state_machine.transition_to("Blast")
-	if not player.moves[4]:
+	elif not player.moves[4]:
 		charge_off()
 		player.dash.duration_timer.stop()
 		player.dash.duration_timer.emit_signal("timeout")
 		state_machine.transition_to("Idle")
-	if not player.dash.is_dashing():
+	elif not player.dash.is_dashing():
 		charge_off()
 		state_machine.transition_to("Idle")
 		

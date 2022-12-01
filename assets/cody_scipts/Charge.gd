@@ -24,6 +24,11 @@ func physics_update(delta: float) -> void:
 		animation_sprite.visible = false
 		player.ischarging = false
 		state_machine.transition_to("Hurt", {do_more = true})
+	elif player.dead:
+		animation_sprite.visible = false
+		player.damage_absorbed = min(100, player.damage_absorbed)
+		player.ischarging = false
+		state_machine.transition_to("Hurt")
 	
 	if player.moves[3]:
 		animation_sprite.visible = false

@@ -4,7 +4,7 @@
 [ext_resource path="res://images/Stages/BulkHead/cols.png" type="Texture" id=2]
 [ext_resource path="res://images/Stages/BulkHead/bulkhead-walls-pipes.png" type="Texture" id=3]
 [ext_resource path="res://images/Stages/BulkHead/bulkhead-walls-back.png" type="Texture" id=4]
-[ext_resource path="res://music/cyberpunk-street.wav" type="AudioStream" id=5]
+[ext_resource path="res://music/LOOP_Eyes on the Prize.wav" type="AudioStream" id=5]
 [ext_resource path="res://images/Stages/BulkHead/bulkhead-walls-platform.png" type="Texture" id=6]
 
 [sub_resource type="Shader" id=9]

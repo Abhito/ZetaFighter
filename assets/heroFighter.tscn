@@ -1323,7 +1323,9 @@ self_modulate = Color( 1.50196, 1.50196, 1, 1 )
 light_mask = 12
 position = Vector2( 4, 0 )
 scale = Vector2( 0.5, 0.5 )
+z_index = -1
 frames = SubResource( 37 )
+frame = 3
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Position2D"]

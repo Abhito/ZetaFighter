@@ -8,6 +8,7 @@ export var jump_strength := 1200.0
 export var maximum_jumps := 2
 export var double_jump_strength := 800.0
 export var gravity := 4000.0
+export var id = 2
 
 const dash_speed := 800
 const dash_duration := 0.2
@@ -156,7 +157,7 @@ func _physics_process(delta: float) -> void:
 			dash_direction = -1 * _pivot.scale.x
 	_infront_check()
 	if(damage_absorbed > 0):
-		damage_absorbed -= delta * 10
+		damage_absorbed -= delta * 12
 	manage_ki()
 
 func pressing():
@@ -201,7 +202,7 @@ func isdead():
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body == _other_player:
-		_other_player.hit(40)
+		_other_player.hit(45)
 
 
 func _on_DashTimer_timeout():

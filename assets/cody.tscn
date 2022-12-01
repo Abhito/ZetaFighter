@@ -2137,7 +2137,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 
-[node name="cody" type="KinematicBody2D"]
+[node name="Cody" type="KinematicBody2D"]
 position = Vector2( 24, 32 )
 collision_layer = 2
 collision_mask = 19
@@ -2163,7 +2163,9 @@ modulate = Color( 1.5, 1, 1, 1 )
 light_mask = 12
 position = Vector2( 0, 33 )
 scale = Vector2( 0.35, 0.35 )
+z_index = -1
 frames = SubResource( 37 )
+frame = 1
 playing = true
 offset = Vector2( 0, -140 )
 
@@ -2191,12 +2193,11 @@ visible = false
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/SwordChecker"]
+[node name="SearchArea" type="CollisionShape2D" parent="Position2D/SwordChecker"]
 position = Vector2( 0, 11 )
 shape = SubResource( 51 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 4, 0 )
 shape = SubResource( 4 )
 
@@ -2246,17 +2247,20 @@ script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack1"
 next_state = "Attack2"
+distance = 30
 
 [node name="Attack2" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack2"
 next_state = "Attack3"
+distance = 30
 
 [node name="Attack3" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack3"
+distance = 30
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )

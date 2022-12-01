@@ -20,6 +20,8 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Hurt", {do_more = true})
 		else:
 			state_machine.transition_to("Hurt")
+	elif player.dead:
+		state_machine.transition_to("Hurt")
 			
 	if player.moves[4] and player.moves[3] and player.powered:
 		state_machine.transition_to("Blast")

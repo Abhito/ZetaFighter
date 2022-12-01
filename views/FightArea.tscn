@@ -20,10 +20,10 @@ colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.96
 gradient = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 640, 34 )
+extents = Vector2( 1155, 153 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 451.5 )
+extents = Vector2( 256, 451.5 )
 
 [sub_resource type="Environment" id=5]
 background_mode = 4
@@ -124,23 +124,30 @@ scale = Vector2( 0.625, 70 )
 texture = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 624, 38 )
+position = Vector2( 623, 158 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
+position = Vector2( 623, -801 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
-collision_layer = 9
-collision_mask = 15
+collision_mask = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1296, 279 )
+position = Vector2( 1536, 279 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -16, 272 )
+position = Vector2( -256, 279 )
 shape = SubResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
+
+[node name="test" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 640, 360 )
+zoom = Vector2( 1.5, 1.5 )
 
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_Button_pressed"]

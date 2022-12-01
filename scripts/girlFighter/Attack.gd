@@ -5,9 +5,14 @@ onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 export var animation: String
 export var next_state: String
+export var distance: int
 var action_pressed = false
 
 func enter(_msg := {}) -> void:
+	if player._pivot.scale.x == -1:
+		player._velocity.x -= distance
+	else:
+		player._velocity.x += distance
 	animation_player.play(animation)
 	player.can_input = false
 	action_pressed = false

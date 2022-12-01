@@ -24,8 +24,10 @@ func _physics_process(delta):
 			var power = c.collider.is_proj()
 			if damage_tier <= power:
 				queue_free()
-		else:
-			queue_free()
 		
 func is_proj():
 	return 0
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

@@ -20,6 +20,8 @@ func size(value):
 		damage_tier = 3
 	elif damage > 125:
 		damage_tier = 2
+	if damage > 500:
+		damage == 500
 	
 func _physics_process(delta):
 	var v = direction * speed * delta
@@ -32,8 +34,10 @@ func _physics_process(delta):
 			var power = c.collider.is_proj()
 			if damage_tier <= power:
 				queue_free()
-		else:
-			queue_free()
 		
 func is_proj():
 	return damage_tier
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

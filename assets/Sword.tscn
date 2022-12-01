@@ -45,7 +45,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ -1 ]
+"values": [ -2 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -148,6 +148,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sword:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "Spin"
@@ -199,7 +211,6 @@ script = ExtResource( 2 )
 
 [node name="Sword" type="Sprite" parent="."]
 rotation = 3.92699
-z_index = -1
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -15,6 +15,9 @@ func _process(delta):
 		if Input.is_action_just_pressed("action1_one"):
 			Match.aiMode = false
 			get_tree().change_scene("res://views/CharacterSelect.tscn")
+		elif Input.is_action_just_pressed("action2_one"):
+			Match.aiMode = true
+			get_tree().change_scene("res://views/CharacterSelect.tscn")
 
 
 func _on_playButton_pressed():

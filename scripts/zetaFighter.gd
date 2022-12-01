@@ -9,6 +9,7 @@ export var jump_strength := 1000.0
 export var maximum_jumps := 2
 export var double_jump_strength := 900.0
 export var gravity := 4000.0
+export var id = 4
 
 const dash_speed := 500.0
 const dash_duration := 2.0
@@ -22,7 +23,7 @@ var can_input = true
 var spawn_blast = false
 var hurt = false
 var hurt_big = false
-var health = 1600
+var health = 1300
 var dead = false
 var charge = 0
 var ischarging = false
@@ -64,6 +65,8 @@ func _setup(_player, number, healthbar, myMoves):
 	myNumber = number
 	health_bar = healthbar
 	moveList = myMoves
+	if _other_player.id == id:
+		charge_rate = .5
 	if myNumber == 2 and Match.aiMode:
 		isAI = true
 		charge_rate = 1
@@ -122,7 +125,7 @@ func _physics_process(delta: float) -> void:
 		if dash_count > 1: 
 			dash_direction = -1 * _pivot.scale.x
 	_infront_check()
-	if charge < 4.5:
+	if charge < 5:
 		charge += delta * charge_rate
 	if charge >= 4:
 		$Position2D/Ki.visible = true
@@ -177,7 +180,7 @@ func toggle_monitor(value):
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body == _other_player:
-		_other_player.hit(60)
+		_other_player.hit(65)
 
 
 func _on_DashTimer_timeout():

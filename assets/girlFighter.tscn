@@ -1188,6 +1188,7 @@ modulate = Color( 1, 1, 1.5, 1 )
 light_mask = 12
 position = Vector2( 0, 32 )
 scale = Vector2( 0.45, 0.45 )
+z_index = -1
 frames = SubResource( 37 )
 playing = true
 offset = Vector2( 0, -99 )
@@ -1246,17 +1247,20 @@ script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack1"
 next_state = "Attack2"
+distance = 10
 
 [node name="Attack2" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack2"
 next_state = "Attack3"
+distance = 10
 
 [node name="Attack3" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack3"
+distance = 10
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
