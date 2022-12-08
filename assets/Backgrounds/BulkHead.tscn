@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Backgrounds/CyberCity.gd" type="Script" id=1]
 [ext_resource path="res://images/Stages/BulkHead/cols.png" type="Texture" id=2]
@@ -56,17 +56,6 @@ tracks/0/keys = {
 "values": [ Color( 0.6, 1, 0.7, 1 ), Color( 0.6, 2, 0.7, 1 ), Color( 0.6, 2, 0.7, 1 ), Color( 0.6, 1, 0.7, 1 ) ]
 }
 
-[sub_resource type="Environment" id=15]
-background_mode = 4
-glow_enabled = true
-glow_levels/4 = true
-glow_levels/5 = false
-glow_intensity = 0.1
-glow_blend_mode = 0
-glow_hdr_threshold = 1.5
-glow_hdr_luminance_cap = 2.0
-glow_bicubic_upscale = true
-
 [node name="Background" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -113,6 +102,3 @@ autoplay = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 12 )
 anims/lights = SubResource( 13 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 15 )

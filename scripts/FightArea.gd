@@ -11,8 +11,8 @@ var characterchosen2 = load(Match.player2)
 var stageInstance = load(Match.stage)
 var ai = preload("res://assets/AIController.tscn")
 var lights_on = false
-var moveList1 = ["left_one", "up_one", "right_one", "action1_one", "action2_one"]
-var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"]
+var moveList1 = ["left_one", "up_one", "right_one","action1_one", "action2_one", "down_one"]
+var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two", "down_two"]
 
 
 
@@ -72,8 +72,10 @@ func _initialize():
 func setupHealth(var one, var two):
 	_player1health.max_value = one
 	_player1health.value = one
+	_player1health.energy_bar.max_value = one/2.5
 	_player2health.max_value = two
 	_player2health.value = two
+	_player2health.energy_bar.max_value = two/2.5
 
 func _on_Button_pressed():
 	get_tree().change_scene("res://views/Menu.tscn")
@@ -81,11 +83,6 @@ func _on_Button_pressed():
 func _physics_process(delta):
 	if _player1health.value <= 0 or _player2health.value <= 0:
 		get_tree().change_scene("res://views/Menu.tscn")
-	elif _player1health.value == .01:
-		if(_camera.targets.size() > 1):
-			_camera.targets.remove(0)
-	elif _player2health.value == .01:
-		_camera.targets.remove(1)
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().change_scene("res://views/Menu.tscn")
 

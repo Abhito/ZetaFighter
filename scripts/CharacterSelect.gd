@@ -36,6 +36,7 @@ onready var stageLabel = $StageSelect/Label
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	rng.randomize()
 	if Match.aiMode:
 		ready2 = true
 	glow.play("glow")
@@ -111,13 +112,15 @@ func _physics_process(delta):
 		ready2label.visible = false
 	
 	if stageready:
-		var num = numStage
-		if numStage == 0:
-			num = rng.randi_range(1, stageTotal - 1)
-		stagearrows.visible = false
-		Match.stage = stages[num]
-		starting.visible = true
-		player.play("Loading")
+		if !player.is_playing():
+			var num = numStage
+			if numStage == 0:
+				num = rng.randi_range(1, stageTotal - 1)
+			stagearrows.visible = false
+			print(num)
+			Match.stage = stages[num]
+			starting.visible = true
+			player.play("Loading")
 	else:
 		starting.visible = false
 		player.stop()

@@ -2,8 +2,8 @@ extends Camera2D
 
 export var move_speed = .9
 export var zoom_speed = 0.5
-export var min_zoom = 1.5
-export var max_zoom = 5
+export var min_zoom = .1
+export var max_zoom = 1
 export var margin = Vector2(400, 200)
 
 var targets = []
@@ -36,6 +36,7 @@ func _process (delta):
 func add_target(t):
 	if not t in targets:
 		targets.append(t)
+		return targets.size()
 		
 func remove_target(t):
 	if t in targets:

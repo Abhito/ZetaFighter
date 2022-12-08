@@ -7,7 +7,8 @@ func enter(_msg := {}) -> void:
 	animation_player.play("Fall")
 	
 func physics_update(delta: float) -> void:
-		
+	if player.frozen:
+		return	
 	if not is_zero_approx(player.get_input_direction()):
 		#player._velocity.x = player.get_input_direction() * player.speed
 		player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed, player.acceleration * delta)

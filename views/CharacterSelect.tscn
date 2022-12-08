@@ -365,7 +365,7 @@ margin_right = 832.0
 margin_bottom = 680.0
 custom_colors/default_color = Color( 0.74902, 0.101961, 0.184314, 1 )
 custom_fonts/normal_font = SubResource( 12 )
-text = "Starting ."
+text = "Starting"
 
 [node name="Select" type="RichTextLabel" parent="."]
 margin_left = 384.0

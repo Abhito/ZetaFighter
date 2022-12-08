@@ -51,10 +51,18 @@ var moves = [false, false, false, false, false]
 var isAI = false
 var _horizontal_direction = 0
 
+var _camera = null
+var in_super = false
+var frozen = false
+var super_ready = false
+
+func _ready():
+	_camera = get_tree().current_scene.get_node("Camera2D")
+
 func get_input_direction() -> float:
 	if not can_input:
 		return 0.0
-	if !isAI:
+	if !isAI and !frozen:
 		_horizontal_direction = 0
 		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
@@ -134,6 +142,8 @@ func _physics_process(delta: float) -> void:
 
 #this method handles player input
 func pressing():
+	if frozen:
+		return
 	if !isAI:
 		if Input.is_action_just_pressed(moveList[0]):
 			moves[0] = true
@@ -177,6 +187,13 @@ func turn_off():
 
 func toggle_monitor(value):
 	$Position2D/ProjChecker.monitoring = value
+	
+func looseCamera():
+	if _camera.targets.size() > 1:
+		_camera.targets.remove(myNumber - 1)
+	else:
+		_camera.targets.remove(0)
+			
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body == _other_player:

@@ -32,7 +32,9 @@ func physics_update(delta: float) -> void:
 	if player.moves[3]:
 		action_pressed = true
 	
-	if next_state and player.can_input and action_pressed:
+	if player.can_input and action_pressed and player.super_ready and player.moves[5]:
+		state_machine.transition_to("Super")
+	elif next_state and player.can_input and action_pressed:
 		state_machine.transition_to(next_state)
 	
 	if not animation_player.is_playing():

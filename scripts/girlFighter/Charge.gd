@@ -31,7 +31,7 @@ func physics_update(delta: float) -> void:
 		animation_sprite.visible = false
 		player.ischarging = false
 		state_machine.transition_to("Hurt")
-	
+		
 	if player.moves[3]:
 		animation_sprite.visible = false
 		player.ischarging = false

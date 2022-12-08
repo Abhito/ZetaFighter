@@ -35,23 +35,34 @@ var _velocity := Vector2.ZERO
 onready var _pivot = get_node("Position2D")
 onready var _animation_sprite = get_node("Position2D/Sprite")
 onready var hand_position = get_node("Position2D/ProjPosition")
+onready var super_position = get_node("Position2D/SuperPosition")
 onready var dash = $Dash
 onready var timer = $DashTimer
 onready var ki = $Position2D/Ki
 var blast = preload("res://assets/KiProjectile.tscn")
+var super = preload("res://assets/girlFighterSuper.tscn")
 
 var _other_player = null
 var myNumber = 0
 var health_bar = null
 var moveList = []
-var moves = [false, false, false, false, false]
+var moves = [false, false, false, false, false, false]
 var isAI = false
 var _horizontal_direction = 0
+
+var _camera = null
+var in_super = false
+var frozen = false
+var super_ready = false
+onready var my_camera = $LucyCam
+
+func _ready():
+	_camera = get_tree().current_scene.get_node("Camera2D")
 
 func get_input_direction() -> float:
 	if not can_input:
 		return 0.0
-	if !isAI:
+	if !isAI and !frozen:
 		_horizontal_direction = 0
 		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
@@ -76,6 +87,8 @@ func ready_for_proj():
 	spawn_blast = true
 
 func hit(value):
+	if in_super:
+		return
 	if ischarging:
 		damage_absorbed += value * .9
 		value = value * .1
@@ -90,11 +103,15 @@ func hit(value):
 	if value > 150:
 		hurt_big = true
 	health -= value
+	#handle dying
 	if health <= 0:
 		health_bar.value = 0.01
 		dead = true
 	else:
 		health_bar.value = health
+		health_bar.energy_bar.value += value
+		if health_bar.energy_bar.value >= health_bar.energy_bar.max_value:
+			super_ready = true
 		health_bar.makeShake()
 
 func fire():
@@ -108,6 +125,14 @@ func fire():
 		proj.direction = Vector2.RIGHT
 	elif _pivot.scale.x == -1:
 		proj.direction = Vector2.LEFT
+	proj.add_collision_exception_with(self)
+	get_tree().current_scene.add_child(proj)
+	
+func fireSuper():
+	spawn_blast = false
+	var proj = super.instance()
+	proj.position = super_position.global_position
+	proj.direct(_other_player.global_position)
 	proj.add_collision_exception_with(self)
 	get_tree().current_scene.add_child(proj)
 	
@@ -132,6 +157,8 @@ func _physics_process(delta: float) -> void:
 
 #this method handles player input
 func pressing():
+	if frozen:
+		return
 	if !isAI:
 		if Input.is_action_just_pressed(moveList[0]):
 			moves[0] = true
@@ -152,7 +179,11 @@ func pressing():
 		if Input.is_action_pressed(moveList[4]):
 			moves[4] = true
 		else:
-			moves[4] = false	
+			moves[4] = false
+		if Input.is_action_pressed(moveList[5]):
+			moves[5] = true
+		else:
+			moves[5] = false
 		
 func manage_ki():
 	ki.scale.x = charge * .08 + .1
@@ -166,6 +197,22 @@ func _infront_check():
 		
 func isdead():
 	health_bar.value = 0
+
+func looseCameraOnDeath():
+	if _camera.targets.size() > 1:
+		_camera.targets.remove(myNumber - 1)
+	else:
+		_camera.targets.remove(0)
+			
+func looseCamera():
+	_other_player.frozen = false
+	my_camera.current = false
+	_camera.current = true
+
+func getCamera():
+	_other_player.frozen = true
+	my_camera.current = true
+	_camera.current = false
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body == _other_player:
