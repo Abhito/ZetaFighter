@@ -45,7 +45,7 @@ var _other_player = null
 var myNumber = 0
 var health_bar = null
 var moveList = []
-var moves = [false, false, false, false, false]
+var moves = [false, false, false, false, false, false]
 var isAI = false
 var _horizontal_direction = 0
 
@@ -53,6 +53,8 @@ var _camera = null
 var in_super = false
 var frozen = false
 var super_ready = false
+onready var my_camera = $CodyCam
+onready var super_pos = $Position2D/SuperPos
 
 func _ready():
 	_camera = get_tree().current_scene.get_node("Camera2D")
@@ -84,6 +86,8 @@ func ready_for_proj():
 	spawn_blast = true
 
 func hit(value):
+	if in_super:
+		return
 	if ischarging:
 		damage_absorbed += value * .9
 		value = value * .1
@@ -103,6 +107,9 @@ func hit(value):
 		dead = true
 	else:
 		health_bar.value = health
+		health_bar.energy_bar.value += value
+		if health_bar.energy_bar.value >= health_bar.energy_bar.max_value:
+			super_ready = true
 		health_bar.makeShake()
 
 func fire():
@@ -191,7 +198,11 @@ func pressing():
 		if Input.is_action_pressed(moveList[4]):
 			moves[4] = true
 		else:
-			moves[4] = false		
+			moves[4] = false
+		if Input.is_action_pressed(moveList[5]):
+			moves[5] = true
+		else:
+			moves[5] = false
 			
 
 func manage_ki():
@@ -208,12 +219,29 @@ func _infront_check():
 func isdead():
 	health_bar.value = 0
 		
-func looseCamera():
+func looseCameraOnDeath():
 	if _camera.targets.size() > 1:
 		_camera.targets.remove(myNumber - 1)
 	else:
 		_camera.targets.remove(0)
+
+func looseCamera():
+	_other_player.frozen = false
+	my_camera.current = false
+	_camera.current = true		
+func getCamera():
+	_other_player.frozen = true
+	my_camera.current = true
+	_camera.current = false
 			
+func do_damage():
+	_other_player.hit(40)
+	
+func moveCamera():
+	my_camera.global_position = super_pos.global_position
+func cameraReset():
+	my_camera.position.x = 0
+	my_camera.position.y = -30
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body == _other_player:
