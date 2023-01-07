@@ -84,7 +84,7 @@ motion_mirroring = Vector2( 890.4, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 self_modulate = Color( 1.5, 1, 1, 1 )
-position = Vector2( 448, 360 )
+position = Vector2( 445, 360 )
 scale = Vector2( 2.65, 2.65 )
 texture = ExtResource( 3 )
 
@@ -94,16 +94,16 @@ motion_mirroring = Vector2( 678.4, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
 material = SubResource( 16 )
-position = Vector2( 336, 392 )
+position = Vector2( 339, 392 )
 scale = Vector2( 2.65, 2.65 )
 texture = ExtResource( 4 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1823.2, 0 )
+motion_mirroring = Vector2( 1599.6, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 material = SubResource( 14 )
-position = Vector2( 800, 408 )
+position = Vector2( 799, 408 )
 scale = Vector2( 2.325, 2.325 )
 texture = ExtResource( 2 )
 

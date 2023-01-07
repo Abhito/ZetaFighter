@@ -1,7 +1,5 @@
 extends ProgressBar
 
-var shake_amount = 1.0
-
 onready var energy_bar = $Energy
 export var shake_power = 4
 export var shake_time = 0.4
