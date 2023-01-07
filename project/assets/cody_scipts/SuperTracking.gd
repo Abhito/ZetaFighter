@@ -15,11 +15,15 @@ func physics_update(delta: float) -> void:
 	
 	player._velocity.y = 0
 	var c = player.move_and_collide(player._velocity)
-	
 	if c and c.collider:
 		if c.collider.has_method("hit"):
+			player.health_bar.energy_bar.value = 0
+			player.super_ready = false
 			state_machine.transition_to("Super")
 		elif c.collider.has_method("is_proj"):
 			pass
 		else:
+			player.health_bar.energy_bar.value = 0
+			player.super_ready = false
+			player.in_super = false
 			state_machine.transition_to("Idle")

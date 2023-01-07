@@ -235,7 +235,7 @@ func getCamera():
 	_camera.current = false
 			
 func do_damage():
-	_other_player.hit(40)
+	_other_player.hit(50)
 	
 func moveCamera():
 	my_camera.global_position = super_pos.global_position

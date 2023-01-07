@@ -1052,6 +1052,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [ Vector2( 28, 8 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath(".:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 32.0 ]
+}
 
 [sub_resource type="Animation" id=47]
 resource_name = "Super"
@@ -1371,6 +1383,7 @@ position = Vector2( 0, 32 )
 scale = Vector2( 0.45, 0.45 )
 z_index = -1
 frames = SubResource( 37 )
+frame = 1
 playing = true
 offset = Vector2( 0, -99 )
 
