@@ -53,7 +53,7 @@ var frozen = false
 var super_ready = false
 
 func _ready():
-	_camera = get_tree().current_scene.get_node("Camera2D")
+	_camera = get_node("/root/FightArea/Camera2D")
 
 func get_input_direction() -> float:
 	if not can_input:

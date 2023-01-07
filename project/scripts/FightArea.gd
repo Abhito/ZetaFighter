@@ -18,6 +18,7 @@ var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().current_scene = self
 	$CanvasLayer/Control/Player1/Label.text = Match.name1
 	$CanvasLayer/Control/Player2/Label.text = Match.name2
 	if !Match.aiMode:
@@ -78,12 +79,13 @@ func setupHealth(var one, var two):
 	_player2health.energy_bar.max_value = two/2.5
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://views/Menu.tscn")
+	goHome()
 
 func _physics_process(delta):
 	if _player1health.value <= 0 or _player2health.value <= 0:
-		get_tree().change_scene("res://views/Menu.tscn")
+		goHome()
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene("res://views/Menu.tscn")
+		goHome()
 
-
+func goHome():
+	SceneChanger.goto_scene("res://views/Menu.tscn", self)

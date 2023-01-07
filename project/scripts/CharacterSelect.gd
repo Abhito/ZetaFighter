@@ -44,7 +44,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene("res://views/Menu.tscn")
+		SceneChanger.goto_scene("res://views/Menu.tscn", self)
 	num_check()
 	stage_change()
 	if !ready1:
@@ -180,4 +180,4 @@ func sprite_change():
 
 
 func changescene():
-	get_tree().change_scene("res://views/FightArea.tscn")
+	SceneChanger.goto_scene("res://views/FightArea.tscn", self)

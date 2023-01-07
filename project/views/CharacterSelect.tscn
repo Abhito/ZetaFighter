@@ -18,7 +18,7 @@
 [ext_resource path="res://images/Stages/BulkHead/bulkhead.png" type="Texture" id=16]
 [ext_resource path="res://images/Stages/Cyber/city.png" type="Texture" id=17]
 
-[sub_resource type="Shader" id=10]
+[sub_resource type="Shader" id=30]
 code = "shader_type canvas_item;
 // Which color you want to change
 uniform vec4 u_color_key : hint_color;
@@ -42,7 +42,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
+shader = SubResource( 30 )
 shader_param/u_color_key = Color( 0.835294, 0.792157, 0.74902, 1 )
 shader_param/u_replacement_color = Color( 1, 0.588235, 0, 1 )
 shader_param/u_tolerance = 0.3
@@ -76,7 +76,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1.5, 1.5, 1.5, 1 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1.5, 1.5, 1.5, 1 ) ]
+"values": [ Color( 2, 0.59, 0, 1 ), Color( 1, 0.588235, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 2, 0.59, 0, 1 ) ]
 }
 
 [sub_resource type="DynamicFont" id=12]

@@ -45,6 +45,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Match="*res://scripts/match.gd"
+ParticlesCache="*res://scripts/ParticlesCache.gd"
+SceneChanger="*res://scripts/SceneChanger.gd"
 
 [debug]
 
