@@ -57,7 +57,7 @@ onready var my_camera = $CodyCam
 onready var super_pos = $Position2D/SuperPos
 
 func _ready():
-	_camera = get_tree().current_scene.get_node("Camera2D")
+	_camera = get_node("/root/FightArea/Camera2D")
 
 func get_input_direction() -> float:
 	if not can_input:
