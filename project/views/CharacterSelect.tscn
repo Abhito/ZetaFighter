@@ -359,6 +359,7 @@ anims/RESET = SubResource( 4 )
 anims/glow = SubResource( 5 )
 
 [node name="Starting" type="RichTextLabel" parent="."]
+visible = false
 margin_left = 464.0
 margin_top = 592.0
 margin_right = 832.0
@@ -404,6 +405,7 @@ text = "Character"
 align = 1
 
 [node name="Ready" type="Label" parent="Player1"]
+visible = false
 margin_left = 8.0
 margin_top = 216.0
 margin_right = 96.0
@@ -458,6 +460,7 @@ text = "Character"
 align = 1
 
 [node name="Ready" type="Label" parent="Player2"]
+visible = false
 margin_left = 32.0
 margin_top = 215.0
 margin_right = 120.0

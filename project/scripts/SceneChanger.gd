@@ -42,7 +42,6 @@ func goto_scene(path, current_scene):
 		elif err == OK:
 			#Still loading
 			var progress = float(loader.get_stage())/loader.get_stage_count()
-			loading_bar.value = progress * 100
 		else:
 			print("Error while loading file")
 			break
