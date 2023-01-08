@@ -16,6 +16,11 @@ func enter(_msg := {}) -> void:
 		
 func physics_update(delta: float) -> void:
 	if player.frozen:
+		if player.hurt == true:
+			if player.hurt_big:
+				state_machine.transition_to("Hurt", {do_more = true})
+			else:
+				state_machine.transition_to("Hurt")
 		return
 	if not is_zero_approx(player.get_input_direction()):
 		#player._velocity.x = player.get_input_direction() * player.speed

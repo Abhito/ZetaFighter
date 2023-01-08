@@ -51,7 +51,6 @@ var isAI = false
 var _horizontal_direction = 0
 
 var _camera = null
-var in_super = false
 var frozen = false
 var super_ready = false
 onready var my_camera = $LucyCam
@@ -87,8 +86,6 @@ func ready_for_proj():
 	spawn_blast = true
 
 func hit(value):
-	if in_super:
-		return
 	if ischarging:
 		damage_absorbed += value * .9
 		value = value * .1
@@ -205,12 +202,10 @@ func looseCameraOnDeath():
 		_camera.targets.remove(0)
 			
 func looseCamera():
-	_other_player.frozen = false
 	my_camera.current = false
 	_camera.current = true
 
 func getCamera():
-	_other_player.frozen = true
 	my_camera.current = true
 	_camera.current = false
 

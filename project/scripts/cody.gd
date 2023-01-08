@@ -239,6 +239,7 @@ func do_damage():
 	
 func moveCamera():
 	my_camera.global_position = super_pos.global_position
+	
 func cameraReset():
 	my_camera.position.x = 0
 	my_camera.position.y = -30

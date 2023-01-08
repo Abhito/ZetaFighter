@@ -21,10 +21,10 @@ colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.96
 gradient = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1155, 153 )
+extents = Vector2( 1348, 153 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 256, 451.5 )
+extents = Vector2( 355.5, 451.5 )
 
 [sub_resource type="Environment" id=5]
 background_mode = 4
@@ -94,6 +94,7 @@ margin_right = 1726.0
 margin_bottom = 47.992
 rect_scale = Vector2( -1, 1 )
 theme = ExtResource( 1 )
+value = 50.0
 percent_visible = false
 script = ExtResource( 5 )
 
@@ -148,18 +149,18 @@ position = Vector2( 623, 158 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 623, -801 )
+position = Vector2( 620, -801 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1536, 279 )
+position = Vector2( 1636, 279 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -256, 279 )
+position = Vector2( -355.5, 279 )
 shape = SubResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

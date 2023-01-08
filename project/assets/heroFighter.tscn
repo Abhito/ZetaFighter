@@ -1329,6 +1329,7 @@ position = Vector2( 4, 0 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 frames = SubResource( 37 )
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Position2D"]
@@ -1395,17 +1396,20 @@ script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack1"
 next_state = "Attack2"
+distance = 100
 
 [node name="Attack2" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack2"
 next_state = "Attack3"
+distance = 100
 
 [node name="Attack3" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 _animation_player = NodePath("../../AnimationPlayer")
 animation = "Attack3"
+distance = 300
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )

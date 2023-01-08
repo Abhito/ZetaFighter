@@ -5,12 +5,10 @@ onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
 export var animation: String
 export var next_state: String
+export var distance: int
 var action_pressed = false
-var distance = 100
 
 func enter(_msg := {}) -> void:
-	if animation == "Attack3":
-		distance = 300
 	if player._pivot.scale.x == -1:
 		player._velocity.x -= distance
 	else:

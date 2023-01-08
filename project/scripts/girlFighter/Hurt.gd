@@ -10,6 +10,8 @@ func enter(_msg := {}) -> void:
 		animation_player.play("Hurt")
 
 func physics_update(delta: float) -> void:
+	if player.frozen:
+		return
 	if player.dead:
 		state_machine.transition_to("Death")
 	player._velocity.x = 0
