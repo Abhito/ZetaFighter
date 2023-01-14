@@ -42,12 +42,13 @@ onready var timer = $DashTimer
 onready var ki = $Position2D/Ki
 onready var sprite_player = $Position2D/Sprite/AnimationPlayer
 var blast = preload("res://assets/KiProjectile.tscn")
+var super = preload("res://assets/zeta_assets/EpsilonSuper.tscn")
 
 var _other_player = null
 var myNumber = 0
 var health_bar = null
 var moveList = []
-var moves = [false, false, false, false, false]
+var moves = [false, false, false, false, false, false]
 var isAI = false
 var _horizontal_direction = 0
 
@@ -55,6 +56,9 @@ var _camera = null
 var in_super = false
 var frozen = false
 var super_ready = false
+var super_done = false
+var superLaunch
+onready var my_camera = $EpsilonCam
 
 func _ready():
 	_camera = get_node("/root/FightArea/Camera2D")
@@ -104,6 +108,9 @@ func hit(value):
 		dead = true
 	else:
 		health_bar.value = health
+		health_bar.energy_bar.value += value
+		if health_bar.energy_bar.value >= health_bar.energy_bar.max_value:
+			super_ready = true
 		health_bar.makeShake()
 
 func fire():
@@ -120,6 +127,19 @@ func fire():
 	proj.add_collision_exception_with(self)
 	get_tree().current_scene.add_child(proj)
 	
+func super():
+	spawn_blast = false
+	var proj = super.instance()
+	proj.avoid(self)
+	proj.position = hand_position.global_position
+	proj.direct(_other_player.global_position)
+	if _pivot.scale.x == 1:
+		proj.direction = Vector2.RIGHT
+	elif _pivot.scale.x == -1:
+		proj.direction = Vector2.LEFT
+	get_tree().current_scene.add_child(proj)
+	superLaunch = proj
+	
 func _physics_process(delta: float) -> void:
 	pressing()
 	if moves[0]:
@@ -132,12 +152,13 @@ func _physics_process(delta: float) -> void:
 		dash_count = dash_count + 1
 		if dash_count > 1: 
 			dash_direction = -1 * _pivot.scale.x
-	_infront_check()
 	if charge < 5:
 		charge += delta * charge_rate
 	if charge >= 4:
 		$Position2D/Ki.visible = true
 		powered = true
+	if not in_super:
+		_infront_check()
 	manage_ki()
 
 #this method handles player input
@@ -164,7 +185,11 @@ func pressing():
 		if Input.is_action_pressed(moveList[4]):
 			moves[4] = true
 		else:
-			moves[4] = false	
+			moves[4] = false
+		if Input.is_action_pressed(moveList[5]):
+			moves[5] = true
+		else:
+			moves[5] = false
 		
 func manage_ki():
 	ki.scale.x = charge * .08 + .1
@@ -188,11 +213,25 @@ func turn_off():
 func toggle_monitor(value):
 	$Position2D/ProjChecker.monitoring = value
 	
-func looseCamera():
+func super_done():
+	super_done = true
+	
+func looseCameraOnDeath():
 	if _camera.targets.size() > 1:
 		_camera.targets.remove(myNumber - 1)
 	else:
 		_camera.targets.remove(0)
+			
+func looseCamera():
+	my_camera.current = false
+	_camera.current = true
+
+func getCamera():
+	my_camera.current = true
+	_camera.current = false
+	
+func despawn_Super():
+	superLaunch.queue_free()
 			
 
 func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):

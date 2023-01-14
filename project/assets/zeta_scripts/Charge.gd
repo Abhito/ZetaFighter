@@ -8,6 +8,7 @@ func enter(_msg := {}) -> void:
 	player.toggle_monitor(true)
 	player.ischarging = true
 	player.set_collision_layer_bit(1, false)
+	player.set_collision_layer_bit(4, true)
 	animation_player.play("Walk")
 	player.dash.start_dash(player._animation_sprite, player.dash_duration, player._pivot.scale.x)
 
@@ -50,4 +51,5 @@ func charge_off():
 	player.sprite_player.play("powered_down")
 	player.ischarging = false
 	player.set_collision_layer_bit(1, true)
+	player.set_collision_layer_bit(4, false)
 	player.toggle_monitor(false)

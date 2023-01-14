@@ -73,10 +73,10 @@ func _initialize():
 func setupHealth(var one, var two):
 	_player1health.max_value = one
 	_player1health.value = one
-	_player1health.energy_bar.max_value = one/2.5
+	_player1health.energy_bar.max_value = one/3
 	_player2health.max_value = two
 	_player2health.value = two
-	_player2health.energy_bar.max_value = two/2.5
+	_player2health.energy_bar.max_value = two/3
 
 func _on_Button_pressed():
 	goHome()

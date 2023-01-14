@@ -43,7 +43,7 @@ var _other_player = null
 var myNumber = 0
 var health_bar = null
 var moveList = []
-var moves = [false, false, false, false, false]
+var moves = [false, false, false, false, false, false]
 var isAI = false
 var _horizontal_direction = 0
 
@@ -51,6 +51,7 @@ var _camera = null
 var in_super = false
 var frozen = false
 var super_ready = false
+onready var my_camera = $ZetaCam
 
 func _ready():
 	_camera = get_node("/root/FightArea/Camera2D")
@@ -101,6 +102,9 @@ func hit(value):
 		dead = true
 	else:
 		health_bar.value = health
+		health_bar.energy_bar.value += value
+		if health_bar.energy_bar.value >= health_bar.energy_bar.max_value:
+			super_ready = true
 		health_bar.makeShake()
 
 func fire():
@@ -130,7 +134,8 @@ func _physics_process(delta: float) -> void:
 	_infront_check()
 	if(damage_absorbed > 0):
 		damage_absorbed -= delta * 9
-	manage_ki()
+	if(!in_super):
+		manage_ki()
 
 #this method handles player input
 func pressing():
@@ -157,6 +162,10 @@ func pressing():
 			moves[4] = true
 		else:
 			moves[4] = false
+		if Input.is_action_pressed(moveList[5]):
+			moves[5] = true
+		else:
+			moves[5] = false
 			
 func manage_ki():
 	ki.scale.x = charge - (damage_absorbed * .0015)
@@ -171,11 +180,21 @@ func _infront_check():
 func isdead():
 	health_bar.value = 0
 		
-func looseCamera():
+func looseCameraOnDeath():
 	if _camera.targets.size() > 1:
 		_camera.targets.remove(myNumber - 1)
 	else:
 		_camera.targets.remove(0)
+
+func looseCamera():
+	_other_player.frozen = false
+	my_camera.current = false
+	_camera.current = true
+
+func getCamera():
+	_other_player.frozen = true
+	my_camera.current = true
+	_camera.current = false
 			
 			
 
@@ -186,3 +205,13 @@ func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape
 
 func _on_DashTimer_timeout():
 	dash_count = 0
+
+
+func _on_Initial_body_entered(body):
+	if body == _other_player:
+		_other_player.hit(200)
+
+
+func _on_Super_body_entered(body):
+	if body == _other_player:
+		_other_player.hit(250)

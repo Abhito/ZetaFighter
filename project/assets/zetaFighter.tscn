@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://images/characters/character_4/ZetaIdle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/zetaFighter.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/zeta_scripts/Walk.gd" type="Script" id=9]
 [ext_resource path="res://assets/zeta_scripts/Fall.gd" type="Script" id=10]
 [ext_resource path="res://assets/zeta_scripts/Air.gd" type="Script" id=11]
+[ext_resource path="res://assets/zeta_scripts/Super.gd" type="Script" id=12]
 [ext_resource path="res://assets/zeta_scripts/Hurt.gd" type="Script" id=13]
 [ext_resource path="res://images/characters/character_4/ZetaCharge.png" type="Texture" id=14]
 [ext_resource path="res://images/characters/particles/ZetaKi.png" type="Texture" id=15]
@@ -1162,6 +1163,138 @@ tracks/9/keys = {
 "values": [ Vector2( 9, 9 ) ]
 }
 
+[sub_resource type="Animation" id=58]
+resource_name = "Super"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 14 ), ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position2D/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 1, 0, 2 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Position2D/Ki:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Position2D/Ki:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.4, 0.4 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "getCamera"
+}, {
+"args": [  ],
+"method": "ready_for_proj"
+}, {
+"args": [  ],
+"method": "looseCamera"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("EpsilonCam:zoom")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8, 0.9, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.4, 0.4 ), Vector2( 0.4, 0.4 ), Vector2( 0.15, 0.15 ), Vector2( 0.2, 0.2 ), Vector2( 0.4, 0.4 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("EpsilonCam:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -25 ), Vector2( 0, -50 ), Vector2( 0, -50 ), Vector2( 20, -20 ), Vector2( 50, -30 ), Vector2( 10, -50 ), Vector2( 0, -50 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Position2D/ProjPosition:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 36, -6 ) ]
+}
+
 [sub_resource type="Animation" id=29]
 resource_name = "Walk"
 loop = true
@@ -1288,7 +1421,7 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
-"method": "looseCamera"
+"method": "looseCameraOnDeath"
 }, {
 "args": [  ],
 "method": "isdead"
@@ -1297,7 +1430,7 @@ tracks/5/keys = {
 
 [node name="zetaFighter" type="KinematicBody2D"]
 position = Vector2( 24, 32 )
-collision_layer = 18
+collision_layer = 2
 collision_mask = 19
 script = ExtResource( 2 )
 
@@ -1305,6 +1438,7 @@ script = ExtResource( 2 )
 position = Vector2( 4, 0 )
 
 [node name="Area2D" type="Area2D" parent="Position2D"]
+visible = false
 position = Vector2( -4, 0 )
 collision_layer = 4
 collision_mask = 23
@@ -1320,7 +1454,7 @@ visible = false
 modulate = Color( 1, 1, 1.5, 1 )
 light_mask = 12
 position = Vector2( 4, 32 )
-scale = Vector2( 0.45, 0.45 )
+scale = Vector2( 0.4, 0.4 )
 z_index = -1
 frames = SubResource( 37 )
 frame = 1
@@ -1354,6 +1488,7 @@ shape = SubResource( 53 )
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 4, 0 )
 shape = SubResource( 4 )
 
@@ -1370,6 +1505,7 @@ anims/Hurt = SubResource( 34 )
 anims/Idle = SubResource( 26 )
 anims/Jump = SubResource( 27 )
 anims/RESET = SubResource( 28 )
+anims/Super = SubResource( 58 )
 anims/Walk = SubResource( 29 )
 anims/death = SubResource( 46 )
 
@@ -1431,11 +1567,19 @@ _animation_player = NodePath("../../AnimationPlayer")
 script = ExtResource( 21 )
 _animation_player = NodePath("../../AnimationPlayer")
 
+[node name="Super" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+_animation_player = NodePath("../../AnimationPlayer")
+
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
 [node name="Dash" parent="." instance=ExtResource( 20 )]
+
+[node name="EpsilonCam" type="Camera2D" parent="."]
+position = Vector2( 0, -50 )
+zoom = Vector2( 0.4, 0.4 )
 
 [connection signal="body_shape_entered" from="Position2D/Area2D" to="." method="_on_Area2D_body_shape_entered"]
 [connection signal="body_entered" from="Position2D/ProjChecker" to="." method="_on_ProjChecker_body_entered"]

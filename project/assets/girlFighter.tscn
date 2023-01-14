@@ -1369,6 +1369,7 @@ position = Vector2( -4, 0 )
 collision_layer = 4
 collision_mask = 23
 monitoring = false
+monitorable = false
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Position2D/Area2D"]
 position = Vector2( 32, 8 )
@@ -1404,7 +1405,6 @@ scale = Vector2( 1e-05, 1e-05 )
 self_modulate = Color( 1, 1, 2, 1 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 50 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
