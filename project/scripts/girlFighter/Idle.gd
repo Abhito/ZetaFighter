@@ -7,13 +7,13 @@ func enter(_msg := {}) -> void:
 	animation_player.play("Idle")
 
 func physics_update(delta: float) -> void:
-	if not player.is_on_floor() and player.global_position.y  < 600 :
+	if not player.is_on_floor() and player.get_global_fixed_position().y  < 600 * player.Fixed_Point :
 		state_machine.transition_to("Fall")
 		return
 	
 	player._velocity.x = 0
-	player._velocity.y += player.gravity * delta
-	player._velocity = player.move_and_slide(player._velocity, Vector2.UP)
+	player._velocity.y += player.gravity * player.Fixed_Point
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	player._jump_made = 0
 	if player.hurt == true:
 		if player.hurt_big:

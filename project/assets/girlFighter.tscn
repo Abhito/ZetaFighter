@@ -84,9 +84,9 @@ animations = [ {
 "speed": 16.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 20.0
-height = 24.0
+[sub_resource type="SGCapsuleShape2D" id=51]
+radius = 1310720
+height = 1594559
 
 [sub_resource type="Animation" id=30]
 resource_name = "Attack1"
@@ -1355,14 +1355,17 @@ tracks/5/keys = {
 } ]
 }
 
-[node name="lucy" type="KinematicBody2D"]
+[node name="lucy" type="SGKinematicBody2D"]
 position = Vector2( 24, 32 )
+fixed_position_x = 1572864
+fixed_position_y = 2097152
 collision_layer = 2
 collision_mask = 19
 script = ExtResource( 2 )
 
-[node name="Position2D" type="Position2D" parent="."]
+[node name="Position2D" type="SGFixedPosition2D" parent="."]
 position = Vector2( 4, 0 )
+fixed_position_x = 262144
 
 [node name="Area2D" type="Area2D" parent="Position2D"]
 position = Vector2( -4, 0 )
@@ -1384,7 +1387,6 @@ position = Vector2( 0, 32 )
 scale = Vector2( 0.45, 0.45 )
 z_index = -1
 frames = SubResource( 37 )
-frame = 1
 playing = true
 offset = Vector2( 0, -99 )
 
@@ -1407,9 +1409,10 @@ scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 50 )
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="SGCollisionShape2D" parent="."]
 position = Vector2( 4, 0 )
-shape = SubResource( 4 )
+fixed_position_x = 262144
+shape = SubResource( 51 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack1 = SubResource( 30 )

@@ -562,7 +562,7 @@ visible = false
 position = Vector2( 1112, 224 )
 scale = Vector2( 3.57167, 3.57167 )
 frames = SubResource( 60 )
-frame = 48
+frame = 9
 
 [connection signal="pressed" from="gamebuttons/playButton" to="." method="_on_playButton_pressed"]
 [connection signal="pressed" from="gamebuttons/aiButton" to="." method="_on_aiButton_pressed"]

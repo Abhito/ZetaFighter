@@ -18,7 +18,7 @@ func physics_update(delta: float) -> void:
 		#player._velocity.x = player.get_input_direction() * player.speed
 		
 	player._velocity.y = 0
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	if player.hurt == true:
 		if player.hurt_big:
 			state_machine.transition_to("Hurt", {do_more = true})

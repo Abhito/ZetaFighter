@@ -20,11 +20,13 @@ colors = PoolColorArray( 0, 0, 0, 1, 0.956055, 0, 0, 1, 0.965517, 0.965517, 0.96
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 7 )
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1348, 153 )
+[sub_resource type="SGRectangleShape2D" id=8]
+extents_x = 88670208
+extents_y = 10354688
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 355.5, 451.5 )
+[sub_resource type="SGRectangleShape2D" id=9]
+extents_x = 22544384
+extents_y = 39256064
 
 [sub_resource type="Environment" id=5]
 background_mode = 4
@@ -128,14 +130,20 @@ smoothing_speed = 3.0
 script = ExtResource( 3 )
 margin = Vector2( 100, 50 )
 
-[node name="Player1" type="Node2D" parent="."]
+[node name="Player1" type="SGFixedNode2D" parent="."]
 position = Vector2( 72, 588 )
+fixed_position_x = 4718592
+fixed_position_y = 38535168
 
-[node name="Player2" type="Node2D" parent="."]
+[node name="Player2" type="SGFixedNode2D" parent="."]
 position = Vector2( 1156, 592 )
+fixed_position_x = 75759616
+fixed_position_y = 38797312
 
-[node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
+[node name="Ground" type="SGStaticBody2D" parent="." groups=["Ground"]]
 position = Vector2( 16, 648 )
+fixed_position_x = 1048576
+fixed_position_y = 42467328
 collision_mask = 0
 
 [node name="texture" type="Sprite" parent="Ground"]
@@ -144,24 +152,32 @@ position = Vector2( 624, 39 )
 scale = Vector2( 0.625, 70 )
 texture = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape2D" type="SGCollisionShape2D" parent="Ground"]
 position = Vector2( 623, 158 )
-shape = SubResource( 1 )
+fixed_position_x = 40828928
+fixed_position_y = 10354688
+shape = SubResource( 8 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 620, -801 )
-shape = SubResource( 1 )
+[node name="CollisionShape2D2" type="SGCollisionShape2D" parent="Ground"]
+position = Vector2( 624, -808 )
+fixed_position_x = 40894464
+fixed_position_y = -52953088
+shape = SubResource( 8 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="SGStaticBody2D" parent="."]
 collision_mask = 0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1636, 279 )
-shape = SubResource( 4 )
+[node name="CollisionShape2D2" type="SGCollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1624, 320 )
+fixed_position_x = 106430464
+fixed_position_y = 20971520
+shape = SubResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -355.5, 279 )
-shape = SubResource( 4 )
+[node name="CollisionShape2D3" type="SGCollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -344, 312 )
+fixed_position_x = -22544384
+fixed_position_y = 20447232
+shape = SubResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )

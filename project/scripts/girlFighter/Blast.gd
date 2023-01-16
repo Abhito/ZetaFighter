@@ -11,7 +11,7 @@ func physics_update(delta: float) -> void:
 		player._velocity.x = lerp(player._velocity.x, 0, player.friction * delta)
 	
 	player._velocity.y += player.gravity * delta * .4
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	if player.hurt == true:
 		if player.hurt_big:
 			state_machine.transition_to("Hurt", {do_more = true})

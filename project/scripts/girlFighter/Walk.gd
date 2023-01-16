@@ -12,11 +12,11 @@ func physics_update(delta: float) -> void:
 		return
 	player._jump_made = 0
 	if not is_zero_approx(player.get_input_direction()):
-		player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed, player.acceleration * delta)
-		#player._velocity.x = player.get_input_direction() * player.speed
+		#player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed * player.Fixed_Point, player.acceleration)
+		player._velocity.x = SGFixed.mul(player.get_input_direction(), player.speed * player.Fixed_Point)
 		
-	player._velocity.y += player.gravity * delta
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity.y += player.gravity * player.Fixed_Point
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	if player.hurt == true:
 		if player.hurt_big:
 			state_machine.transition_to("Hurt", {do_more = true})

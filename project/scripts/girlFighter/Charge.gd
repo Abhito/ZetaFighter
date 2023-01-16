@@ -19,7 +19,7 @@ func physics_update(delta: float) -> void:
 	
 	
 	player._velocity.y += player.gravity * delta * .5
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	
 	if player.hurt_big == true:
 		player.damage_absorbed = min(100, player.damage_absorbed)

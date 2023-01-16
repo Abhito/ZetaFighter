@@ -7,10 +7,10 @@ onready var animation_player:AnimationPlayer = get_node(_animation_player)
 func enter(_msg := {}) -> void:
 	if _msg.has("do_jump"):
 		if(player._jump_made == 0):
-			player._velocity.y = -player.jump_strength
+			player._velocity.y = -player.jump_strength * player.Fixed_Point
 		elif player._jump_made > 0:
 			if player._jump_made < player.maximum_jumps:
-				player._velocity.y = -player.double_jump_strength
+				player._velocity.y = -player.double_jump_strength * player.Fixed_Point
 		player._jump_made += 1
 		animation_player.play("Jump")
 		
@@ -24,12 +24,12 @@ func physics_update(delta: float) -> void:
 		return
 	if not is_zero_approx(player.get_input_direction()):
 		#player._velocity.x = player.get_input_direction() * player.speed
-		player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed, player.acceleration * delta)
+		player._velocity.x = lerp(player._velocity.x, player.get_input_direction() * player.speed * player.Fixed_Point, player.acceleration)
 	else:
-		player._velocity.x = lerp(player._velocity.x, 0, player.air_friction * delta)
+		player._velocity.x = lerp(player._velocity.x, 0, player.air_friction)
 		
-	player._velocity.y += player.gravity * delta
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity.y += player.gravity * player.Fixed_Point
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	if player.hurt == true:
 		if player.hurt_big:
 			state_machine.transition_to("Hurt", {do_more = true})

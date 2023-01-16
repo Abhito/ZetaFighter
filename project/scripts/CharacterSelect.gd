@@ -117,7 +117,6 @@ func _physics_process(delta):
 			if numStage == 0:
 				num = rng.randi_range(1, stageTotal - 1)
 			stagearrows.visible = false
-			print(num)
 			Match.stage = stages[num]
 			starting.visible = true
 			player.play("Loading")

@@ -12,7 +12,7 @@ func physics_update(delta: float) -> void:
 	player._velocity.x = lerp(player._velocity.x, 0, player.friction * delta)
 	
 	player._velocity.y = 0
-	player._velocity = player.move_and_slide(player._velocity, player.UP_Direction)
+	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	
 	if player.spawn_blast:
 		player.fireSuper()

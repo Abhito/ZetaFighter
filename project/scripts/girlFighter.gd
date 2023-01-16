@@ -1,24 +1,24 @@
+extends SGKinematicBody2D
 
-extends KinematicBody2D
+const Fixed_Point = 65536
 
-const UP_Direction := Vector2.UP
+export var speed := 6.0 
 
-export var speed := 350.0
-
-export var jump_strength := 1000.0
+export var jump_strength := 40
 export var maximum_jumps := 2
-export var double_jump_strength := 800.0
-export var gravity := 4000.0
+export var double_jump_strength := 30
+export var gravity := 3
 export var id = 1
 
 const dash_speed := 1000
 const dash_duration := 0.2
 var dash_count = 0
 var dash_direction = 0
+var up_direction := SGFixed.vector2(0, -65536)
 
-var friction = 20
+var friction = 1
 var air_friction = 10
-var acceleration = 60
+var acceleration = 1
 var can_input = true
 var spawn_blast = false
 var hurt = false
@@ -30,7 +30,7 @@ var ischarging = false
 var damage_absorbed = 0
 
 var _jump_made := 0
-var _velocity := Vector2.ZERO
+var _velocity := SGFixedVector2.new()
 
 onready var _pivot = get_node("Position2D")
 onready var _animation_sprite = get_node("Position2D/Sprite")
@@ -48,7 +48,7 @@ var health_bar = null
 var moveList = []
 var moves = [false, false, false, false, false, false]
 var isAI = false
-var _horizontal_direction = 0
+var _horizontal_direction: int = 0
 
 var _camera = null
 var frozen = false
@@ -58,12 +58,12 @@ onready var my_camera = $LucyCam
 func _ready():
 	_camera = get_node("/root/FightArea/Camera2D")
 
-func get_input_direction() -> float:
+func get_input_direction() -> int:
 	if not can_input:
-		return 0.0
+		return 0
 	if !isAI and !frozen:
 		_horizontal_direction = 0
-		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
+		_horizontal_direction = SGFixed.from_float(Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0]))
 	return _horizontal_direction
 	
 	
