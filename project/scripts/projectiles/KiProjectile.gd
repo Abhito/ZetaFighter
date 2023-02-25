@@ -1,14 +1,12 @@
-extends KinematicBody2D
+extends SGKinematicBody2D
 
-var speed = 350
-var direction  := Vector2.RIGHT
+var speed = 3
+var direction  := SGFixed.vector2(65536, 0)
 var damage = 50
 var damage_tier = 1
 
 func _ready():
 	set_as_toplevel(true)
-	direction = direction.normalized()
-	look_at(direction + global_position)
 
 func size(value):
 	damage = damage * value
@@ -24,7 +22,7 @@ func size(value):
 		damage == 500
 	
 func _physics_process(delta):
-	var v = direction * speed * delta
+	var v = direction.mul(speed)
 	var c := move_and_collide(v)
 	if c and c.collider:
 		if c.collider.has_method("hit"):
@@ -37,6 +35,12 @@ func _physics_process(delta):
 		
 func is_proj():
 	return damage_tier
+	
+func set_target(player):
+	if player == 1:
+		set_collision_mask_bit(6, true)
+	else:
+		set_collision_mask_bit(5, true)
 
 
 func _on_VisibilityNotifier2D_screen_exited():

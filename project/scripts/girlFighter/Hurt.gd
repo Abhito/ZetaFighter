@@ -15,7 +15,7 @@ func physics_update(delta: float) -> void:
 	if player.dead:
 		state_machine.transition_to("Death")
 	player._velocity.x = 0
-	player._velocity.y += player.gravity * delta
+	player._velocity.y += player.gravity * player.Fixed_Point
 	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	player.hurt = false
 	player.hurt_big = false

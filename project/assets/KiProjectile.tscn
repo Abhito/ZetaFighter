@@ -19,24 +19,28 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="SGCircleShape2D" id=4]
 
-[node name="KiProjectile" type="KinematicBody2D"]
+[node name="KiProjectile" type="SGKinematicBody2D"]
 light_mask = 12
 collision_layer = 4
-collision_mask = 6
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="KiOrb" type="AnimatedSprite" parent="."]
 light_mask = 12
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="SGCollisionShape2D" parent="."]
 position = Vector2( 4, 0 )
-rotation = 1.5708
-scale = Vector2( 0.7, 1 )
+rotation = 1.57079
+scale = Vector2( 0.699997, 1 )
+fixed_position_x = 262144
+fixed_scale_x = 45875
+fixed_rotation = 102943
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

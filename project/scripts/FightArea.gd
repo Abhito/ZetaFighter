@@ -11,8 +11,8 @@ var characterchosen2 = load(Match.player2)
 var stageInstance = load(Match.stage)
 var ai = preload("res://assets/AIController.tscn")
 var lights_on = false
-var moveList1 = ["left_one", "up_one", "right_one","action1_one", "action2_one", "down_one"]
-var moveList2 = ["left_two", "up_two", "right_two", "action1_two", "action2_two", "down_two"]
+var moveList1 = ["player1_left", "player1_up", "player1_right","player1_attack", "player1_defend", "player1_down"]
+var moveList2 = ["player2_left", "player2_up", "player2_right","player2_attack", "player2_defend", "player2_down"]
 
 
 

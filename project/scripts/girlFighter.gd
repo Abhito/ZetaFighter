@@ -2,15 +2,15 @@ extends SGKinematicBody2D
 
 const Fixed_Point = 65536
 
-export var speed := 6.0 
+export var speed := 7.0 
 
-export var jump_strength := 40
+export var jump_strength := 30
 export var maximum_jumps := 2
-export var double_jump_strength := 30
-export var gravity := 3
+export var double_jump_strength := 25
+export var gravity := 2.5
 export var id = 1
 
-const dash_speed := 1000
+const dash_speed := 20
 const dash_duration := 0.2
 var dash_count = 0
 var dash_direction = 0
@@ -34,11 +34,12 @@ var _velocity := SGFixedVector2.new()
 
 onready var _pivot = get_node("Position2D")
 onready var _animation_sprite = get_node("Position2D/Sprite")
-onready var hand_position = get_node("Position2D/ProjPosition")
+onready var hand_position = $Position2D/ProjPosition
 onready var super_position = get_node("Position2D/SuperPosition")
 onready var dash = $Dash
 onready var timer = $DashTimer
 onready var ki = $Position2D/Ki
+onready var attackArea = $Position2D/AttackArea
 var blast = preload("res://assets/KiProjectile.tscn")
 var super = preload("res://assets/girlFighterSuper.tscn")
 
@@ -63,7 +64,7 @@ func get_input_direction() -> int:
 		return 0
 	if !isAI and !frozen:
 		_horizontal_direction = 0
-		_horizontal_direction = SGFixed.from_float(Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0]))
+		_horizontal_direction = Input.get_action_strength(moveList[2]) - Input.get_action_strength(moveList[0])
 	return _horizontal_direction
 	
 	
@@ -72,6 +73,11 @@ func _setup(_player, number, healthbar, myMoves):
 	myNumber = number
 	health_bar = healthbar
 	moveList = myMoves
+	attackArea._other_player = _other_player
+	if myNumber == 1:
+		set_collision_layer_bit(5, true)
+	else:
+		set_collision_layer_bit(6, true)
 	if myNumber == 2 and Match.aiMode:
 		isAI = true
 	
@@ -94,7 +100,8 @@ func hit(value):
 			hurt = true
 			hurt_big = true
 		else:
-			position.x -= 10 * _pivot.scale.x
+			fixed_position_x -= 5 * _pivot.fixed_scale_x
+			sync_to_physics_engine()
 	else:
 		hurt = true
 	if value > 150:
@@ -114,15 +121,15 @@ func hit(value):
 func fire():
 	spawn_blast = false
 	var proj = blast.instance()
-	proj.position = hand_position.global_position
+	proj.fixed_position = hand_position.get_global_fixed_position()
 	proj.modulate = Color8(255,255,383)
 	proj.size(charge)
+	proj.set_target(myNumber)
 	charge = 1
-	if _pivot.scale.x == 1:
-		proj.direction = Vector2.RIGHT
-	elif _pivot.scale.x == -1:
-		proj.direction = Vector2.LEFT
-	proj.add_collision_exception_with(self)
+	if _pivot.fixed_scale_x == 65536:
+		proj.direction = SGFixed.vector2(65536, 0)
+	elif _pivot.fixed_scale_x == -65536:
+		proj.direction = SGFixed.vector2(-65536, 0)
 	get_tree().current_scene.add_child(proj)
 	
 func fireSuper():
@@ -139,12 +146,12 @@ func _physics_process(delta: float) -> void:
 		timer.start()
 		dash_count = dash_count + 1
 		if dash_count > 1: 
-			dash_direction = 1 * _pivot.scale.x
+			dash_direction = 1 * _pivot.fixed_scale_x
 	if moves[2]:
 		timer.start()
 		dash_count = dash_count + 1
 		if dash_count > 1: 
-			dash_direction = -1 * _pivot.scale.x
+			dash_direction = -1 * _pivot.fixed_scale_x
 	_infront_check()
 	if charge > .8:
 		charge -= delta *.3
@@ -187,10 +194,10 @@ func manage_ki():
 	ki.scale.y = charge * .08 + .1
 				
 func _infront_check():
-	if _other_player.get_global_position().x < _pivot.get_global_position().x:
-		_pivot.scale.x = -1
-	elif _other_player.get_global_position().x > _pivot.get_global_position().x:
-		_pivot.scale.x = 1
+	if _other_player.get_global_fixed_position().x < _pivot.get_global_fixed_position().x:
+		_pivot.fixed_scale_x = -65536
+	elif _other_player.get_global_fixed_position().x > _pivot.get_global_fixed_position().x:
+		_pivot.fixed_scale_x = 65536
 		
 func isdead():
 	health_bar.value = 0
@@ -208,10 +215,6 @@ func looseCamera():
 func getCamera():
 	my_camera.current = true
 	_camera.current = false
-
-func _on_Area2D_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if body == _other_player:
-		_other_player.hit(50)
 
 
 func _on_DashTimer_timeout():

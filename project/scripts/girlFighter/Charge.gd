@@ -15,10 +15,10 @@ func physics_update(delta: float) -> void:
 	if player.charge < 5:
 		player.charge += delta * 1.2
 	if player.is_on_floor():
-		player._velocity.x = lerp(player._velocity.x, 0, player.friction * delta)
+		player._velocity.x = lerp(player._velocity.x, 0, player.friction)
 	
 	
-	player._velocity.y += player.gravity * delta * .5
+	player._velocity.y += player.gravity * player.Fixed_Point * .5
 	player._velocity = player.move_and_slide(player._velocity, player.up_direction)
 	
 	if player.hurt_big == true:

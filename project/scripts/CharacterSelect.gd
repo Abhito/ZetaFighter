@@ -48,19 +48,19 @@ func _physics_process(delta):
 	num_check()
 	stage_change()
 	if !ready1:
-		if Input.is_action_just_pressed("left_one"):
+		if Input.is_action_just_pressed("player1_left"):
 			num1 = num1 - 1
-		elif Input.is_action_just_pressed("right_one"):
+		elif Input.is_action_just_pressed("player1_right"):
 			num1 = num1 + 1
 	if !ready2:
-		if Input.is_action_just_pressed("left_two"):
+		if Input.is_action_just_pressed("player2_left"):
 			num2 = num2 - 1
-		elif Input.is_action_just_pressed("right_two"):
+		elif Input.is_action_just_pressed("player2_right"):
 			num2 = num2 + 1
 	
 	if !(ready1 and ready2):
 		stagearrows.visible = false
-		if Input.is_action_just_pressed("action1_one"):
+		if Input.is_action_just_pressed("player1_attack"):
 			ready1 = true
 			lastPlayer = 1
 			if ready2 and not Match.aiMode:
@@ -68,15 +68,15 @@ func _physics_process(delta):
 			elif Match.aiMode:
 				lastPlayer = 2
 				$labelMover.play("Player1")
-		elif Input.is_action_just_pressed("action2_one"):
+		elif Input.is_action_just_pressed("player1_defend"):
 			ready1 = false
 		if not Match.aiMode: #If not in AI mode than player two can set
-			if Input.is_action_just_pressed("action1_two"):
+			if Input.is_action_just_pressed("player2_attack"):
 				ready2 = true
 				lastPlayer = 2
 				if ready1:
 					$labelMover.play("Player1")
-			elif Input.is_action_just_pressed("action2_two"):
+			elif Input.is_action_just_pressed("player2_defend"):
 				ready2 = false
 	sprite_change()
 	
@@ -128,25 +128,25 @@ func stage_change():
 	if ready1 and ready2 and !stageready:
 		stagearrows.visible = true
 		if lastPlayer == 2:
-			if Input.is_action_just_pressed("left_one"):
+			if Input.is_action_just_pressed("player1_left"):
 				numStage = numStage - 1
-			elif Input.is_action_just_pressed("right_one"):
+			elif Input.is_action_just_pressed("player1_right"):
 				numStage = numStage + 1
-			if Input.is_action_just_pressed("action1_one"):
+			if Input.is_action_just_pressed("player1_attack"):
 				stageready = true
 			if !stageready:
-				if Input.is_action_just_pressed("action2_one"):
+				if Input.is_action_just_pressed("player1_defend"):
 					$labelMover.play("Player1_not")
 					ready1 = false
 		else:
-			if Input.is_action_just_pressed("left_two"):
+			if Input.is_action_just_pressed("player2_left"):
 				numStage = numStage - 1
-			elif Input.is_action_just_pressed("right_two"):
+			elif Input.is_action_just_pressed("player2_right"):
 				numStage = numStage + 1
-			if Input.is_action_just_pressed("action1_two"):
+			if Input.is_action_just_pressed("player2_attack"):
 				stageready = true
 			if !stageready:
-				if Input.is_action_just_pressed("action2_two"):
+				if Input.is_action_just_pressed("player2_defend"):
 					$labelMover.play("Player2_not")
 					ready2 = false
 func num_check():

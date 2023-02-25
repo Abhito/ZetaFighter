@@ -13,10 +13,10 @@ func _ready():
 
 func _process(delta):
 	if done:
-		if Input.is_action_just_pressed("action1_one"):
+		if Input.is_action_just_pressed("player1_attack"):
 			Match.aiMode = false
 			goSelect()
-		elif Input.is_action_just_pressed("action2_one"):
+		elif Input.is_action_just_pressed("player1_defend"):
 			Match.aiMode = true
 			goSelect()
 
